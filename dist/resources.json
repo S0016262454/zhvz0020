@@ -1,0 +1,73 @@
+{
+    "resources": [
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "extended_runnable_file.html"
+        },
+        {
+            "name": "css/zhvz0020_0010.css"
+        },
+        {
+            "name": "i18n/i18n_ja.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "localService/metadata.xml"
+        },
+        {
+            "name": "localService/metadata.xml.org"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "model/zhvz0020_0010.model.js"
+        },
+        {
+            "name": "model/Formatter.js"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "mockdata/metadata.xml"
+        },
+        {
+            "name": "mockdata/Currency.json"
+        },
+        {
+            "name": "mockdata/Products.json"
+        },
+        {
+            "name": "mockdata/server.js"
+        },
+        {
+            "name": "mockdata/ZFAV0020.json"
+        },
+        {
+            "name": "mockdata/Category.json"
+        },
+        {
+            "name": "view/Dialog.fragment.xml"
+        },
+        {
+            "name": "view/zhvz0020_0010.view.xml"
+        },
+        {
+            "name": "controller/zhvz0020_0010.controller.js"
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "neo-app.json"
+        }
+    ]
+}

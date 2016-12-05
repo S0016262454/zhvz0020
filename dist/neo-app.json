@@ -1,0 +1,47 @@
+{
+	"welcomeFile": "/index.html",
+	"routes": [{
+		"path": "/zhyi0010",
+		"target": {
+			"type": "application",
+			"name": "zhyi0010"
+		},
+		"description": "Custom Lib"
+	}, {
+		"path": "/resources",
+		"target": {
+			"type": "service",
+			"name": "sapui5",
+			"entryPath": "/resources"
+		},
+		"description": "SAPUI5 Resources"
+	}, {
+		"path": "/test-resources",
+		"target": {
+			"type": "service",
+			"name": "sapui5",
+			"entryPath": "/test-resources"
+		},
+		"description": "SAPUI5 Test Resources"
+	}, {
+		"path": "/HCP_ODATA",
+		"target": {
+			"type": "destination",
+			"name": "HCP_ODATA"
+		},
+		"description": "HCP_ODATA"
+	}],
+	"sendWelcomeFileRedirect": true,
+	"cacheControl": [{
+		"directive": "private",
+		"maxAge": 0,
+		"path": "**.html"
+	}, {
+		"directive": "private",
+		"maxAge": 0,
+		"path": "sap-ui-cachebuster-info.json"
+	}, {
+		"directive": "public",
+		"maxAge": 31536000
+	}]
+}

@@ -1,0 +1,29 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">
+    <edmx:DataServices
+        xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+        <Schema
+            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZLOCAL.A201608.SalesOrderDetails.model.SalesOrderDetails">
+            <EntityType Name="SalesOrderDetailInfoType">
+                <Key>
+                    <PropertyRef Name="VBELN"/>
+                    <PropertyRef Name="POSNR"/>
+                </Key>
+                <Property Name="VBELN" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="POSNR" Type="Edm.String" Nullable="false" MaxLength="6"/>
+                <Property Name="MATNR" Type="Edm.String" MaxLength="40"/>
+                <Property Name="MAKTX" Type="Edm.String" MaxLength="40"/>
+                <Property Name="WERKS" Type="Edm.String" MaxLength="4"/>
+                <Property Name="LGORT" Type="Edm.String" MaxLength="4"/>
+                <Property Name="CHARG" Type="Edm.String" MaxLength="10"/>
+                <Property Name="QUANT" Type="Edm.Double"/>
+                <Property Name="MEINS" Type="Edm.String" MaxLength="3"/>
+            </EntityType>
+            <EntityContainer Name="SalesOrderDetails" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="SalesOrderDetailInfo" EntityType="ZLOCAL.A201608.SalesOrderDetails.model.SalesOrderDetails.SalesOrderDetailInfoType"/>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
