@@ -1591,8 +1591,7 @@
 		"CHARG": "3",
 		"QUANT": "10",
 		"MEINS": "本"
-	}, 
-	{
+	}, {
 		"MATNR": "TEST002",
 		"MAKTX": "消しゴム",
 		"WERKS": "B001",
@@ -1600,8 +1599,7 @@
 		"CHARG": "10",
 		"QUANT": "100",
 		"MEINS": "個"
-	},
-	{
+	}, {
 		"MATNR": "TEST002",
 		"MAKTX": "ノート",
 		"WERKS": "A001",
@@ -1609,8 +1607,7 @@
 		"CHARG": "10",
 		"QUANT": "200",
 		"MEINS": "冊"
-	}
-	],
+	}],
 	"StockCollectionStats": {
 		"Counts": {
 			"Total": 14,
@@ -1677,5 +1674,349 @@
 				"data": 3
 			}]
 		}]
-	}
+	},
+	"plnt": [{
+		"key": "A110",
+		"text": "商社IPS"
+	}, {
+		"key": "A120",
+		"text": "商社IPS"
+	}, {
+		"key": "A210",
+		"text": "商社IPS"
+	}, {
+		"key": "B100",
+		"text": "製造業IPS"
+	}, {
+		"key": "B200",
+		"text": "製造業IPS"
+	}, {
+		"key": "B300",
+		"text": "製造業IPS"
+	}, {
+		"key": "F000",
+		"text": "商社"
+	}],
+	"PurchasingOrganization": [{
+		"key": "0001",
+		"text": "Einkaufsorg. 0001"
+	}, {
+		"key": "A110",
+		"text": "事業部1"
+	}, {
+		"key": "A120",
+		"text": "事業部2"
+	}, {
+		"key": "A210",
+		"text": "事業部3"
+	}, {
+		"key": "B000",
+		"text": "製造業"
+	}, {
+		"key": "F000",
+		"text": "株式会社○○"
+	}],
+	"PurchasingGroup": [{
+		"key": "001",
+		"text": "Einkäufer 1"
+	}, {
+		"key": "002",
+		"text": "Einkäufer 2"
+	}, {
+		"key": "003",
+		"text": "Einkäufer 3"
+	}, {
+		"key": "A00",
+		"text": "共通"
+	}, {
+		"key": "B00",
+		"text": "共通"
+	}, {
+		"key": "F00",
+		"text": "共通"
+	}],
+	"SalesOrganization": [{
+		"key": "0001",
+		"text": "販売組織001"
+	}, {
+		"key": "0003",
+		"text": ""
+	}, {
+		"key": "A110",
+		"text": "部課1"
+	}, {
+		"key": "A120",
+		"text": "部課2"
+	}, {
+		"key": "A210",
+		"text": "部課3"
+	}, {
+		"key": "B100",
+		"text": "化学"
+	}, {
+		"key": "B200",
+		"text": "機械"
+	}, {
+		"key": "B300",
+		"text": "加工"
+	}, {
+		"key": "F000",
+		"text": "株式会社○○"
+	}],
+	"DistributionChannel": [{
+		"key": "0001",
+		"text": "流通チャネル01"
+	}, {
+		"key": "0003",
+		"text": "流通チャネル01"
+	}, {
+		"key": "A110",
+		"text": "共通"
+	}, {
+		"key": "A120",
+		"text": "共通"
+	}, {
+		"key": "A210",
+		"text": "共通"
+	}, {
+		"key": "B100",
+		"text": "共通"
+	}, {
+		"key": "B200",
+		"text": "共通"
+	}, {
+		"key": "B300",
+		"text": "共通"
+	}, {
+		"key": "F000",
+		"text": "共通"
+	}],
+	"ProductDivision": [{
+		"key": "0001",
+		"text": "商品製品部門01"
+	}, {
+		"key": "0002",
+		"text": ""
+	}, {
+		"key": "0003",
+		"text": "商品製品部門01"
+	}, {
+		"key": "A110",
+		"text": "共通"
+	}, {
+		"key": "A120",
+		"text": "共通"
+	}, {
+		"key": "A210",
+		"text": "共通"
+	}, {
+		"key": "B100",
+		"text": "共通"
+	}, {
+		"key": "B200",
+		"text": "共通"
+	}, {
+		"key": "B300",
+		"text": "共通"
+	}, {
+		"key": "F000",
+		"text": "共通"
+	}],
+	"SalesOffice": [{
+		"key": "0001",
+		"text": "営業所　南部"
+	}, {
+		"key": "A110",
+		"text": "共通"
+	}, {
+		"key": "A120",
+		"text": "共通"
+	}, {
+		"key": "A210",
+		"text": "共通"
+	}, {
+		"key": "B100",
+		"text": "共通"
+	}, {
+		"key": "B100",
+		"text": "東京"
+	}, {
+		"key": "B100",
+		"text": "大阪"
+	}, {
+		"key": "B200",
+		"text": "共通"
+	}, {
+		"key": "B200",
+		"text": "東京"
+	}, {
+		"key": "B200",
+		"text": "大阪"
+	}, {
+		"key": "B300",
+		"text": "共通"
+	}, {
+		"key": "B300",
+		"text": "東京"
+	}, {
+		"key": "B300",
+		"text": "大阪"
+	}, {
+		"key": "F000",
+		"text": "共通"
+	}],
+	"SalesGroup": [{
+		"key": "0001",
+		"text": "営業グループ001"
+	}, {
+		"key": "A000",
+		"text": "共通"
+	}, {
+		"key": "A120",
+		"text": "共通"
+	}, {
+		"key": "B000",
+		"text": "共通"
+	}, {
+		"key": "B010",
+		"text": "共通"
+	}, {
+		"key": "B020",
+		"text": "共通"
+	}, {
+		"key": "F000",
+		"text": "共通"
+	}],
+	"StorageLocation": [{
+		"key": "0001",
+		"text": "Lager001"
+	}, {
+		"key": "0088",
+		"text": "Lager0088(WM)"
+	}, {
+		"key": "0100",
+		"text": "Lagerort WM&HU"
+	}, {
+		"key": "0200",
+		"text": "SCM-EWM"
+	}, {
+		"key": "0001",
+		"text": "Lager001"
+	}, {
+		"key": "0088",
+		"text": "Lager0088(WM)"
+	}, {
+		"key": "0001",
+		"text": "自社"
+	}, {
+		"key": "0002",
+		"text": "倉庫業者"
+	}, {
+		"key": "0003",
+		"text": "MRPエリア設定用"
+	}, {
+		"key": "TEST",
+		"text": "TEST用"
+	}, {
+		"key": "ZZZZ",
+		"text": "転送中"
+	}, {
+		"key": "0001",
+		"text": "自社"
+	}, {
+		"key": "0002",
+		"text": "倉庫業者"
+	}, {
+		"key": "ZZZZ",
+		"text": "転送中"
+	}, {
+		"key": "0001",
+		"text": "自社"
+	}, {
+		"key": "0002",
+		"text": "倉庫業者"
+	}, {
+		"key": "ZZZZ",
+		"text": "転送中"
+	}, {
+		"key": "0001",
+		"text": "製品倉庫"
+	}, {
+		"key": "0002",
+		"text": "工場"
+	}, {
+		"key": "0003",
+		"text": "材料倉庫"
+	}, {
+		"key": "ZZZZ",
+		"text": "転送中"
+	}, {
+		"key": "0001",
+		"text": "製品倉庫"
+	}, {
+		"key": "0002",
+		"text": "工場"
+	}, {
+		"key": "0003",
+		"text": "材料倉庫"
+	}, {
+		"key": "ZZZZ",
+		"text": "転送中"
+	}, {
+		"key": "0001",
+		"text": "製品倉庫"
+	}, {
+		"key": "0002",
+		"text": "工場"
+	}, {
+		"key": "0003",
+		"text": "材料倉庫"
+	}, {
+		"key": "ZZZZ",
+		"text": "転送中"
+	}, {
+		"key": "0001",
+		"text": "自社"
+	}, {
+		"key": "0002",
+		"text": "倉庫業者"
+	}, {
+		"key": "F001",
+		"text": "共通"
+	}, {
+		"key": "ZZZZ",
+		"text": "転送中"
+	}],
+	"SalesItemCategory": [{
+		"key": "0001",
+		"text": "依頼"
+	}, {
+		"key": "ADP1",
+		"text": "要返却梱包材引取"
+	}, {
+		"key": "ADP2",
+		"text": "要返却梱包材出荷"
+	}, {
+		"key": "ADP3",
+		"text": "要返却梱包材販売"
+	}, {
+		"key": "AEBA",
+		"text": "eBay 支払処理"
+	}, {
+		"key": "AEBT",
+		"text": "個別支払処理"
+	}, {
+		"key": "AEN",
+		"text": "サービス受注の見積"
+	}, {
+		"key": "AES",
+		"text": "サービス受注の見積"
+	}, {
+		"key": "AFC",
+		"text": "選定"
+	}, {
+		"key": "AFN",
+		"text": "引合明細"
+	}]
+
 }

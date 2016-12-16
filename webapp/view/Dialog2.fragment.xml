@@ -1,71 +1,43 @@
-<core:FragmentDefinition
-	xmlns="sap.m"
-	xmlns:core="sap.ui.core"
-	>
-	<TableSelectDialog
-		noDataText="No Products Found"
-		title="Stock Product"
-		search="handleSearch"
-		confirm="handleClose"
-		cancel="handleClose"
-		items="{
-			path : '/StockCollection',
-			sorter : {
-				path : 'MATNR',
-				descending : false
-			}
-		}">
-		<ColumnListItem>
-			<cells>
-				<ObjectIdentifier
-					title="{MAKTX}"
-					text="{MATNR}" />
-				<Text text="{WERKS}" />
-				<Text text="{LGORT}" />
-				<Text text="{CHARG}" />
-				<ObjectNumber
-						number="{
-							parts:[{path:'QUANT'},{path:'CurrencyCode'}],
-							type: 'sap.ui.model.type.Currency',
-							formatOptions: {showMeasure: false}
-						}"
-						unit="{MEINS}" />
-			</cells>
-		</ColumnListItem>
-		<columns>
-			<Column width="12em">
-				<header>
-					<Text text="品名" />
-				</header>
-			</Column>
-			<Column
-				minScreenWidth="Tablet"
-				demandPopin="true" >
-				<header>
-					<Text text="プラント" />
-				</header>
-			</Column>
-			<Column
-				minScreenWidth="Tablet"
-				demandPopin="true"
-				hAlign="Right">
-				<header>
-					<Text text="保管場所" />
-				</header>
-			</Column>
-			<Column
-				minScreenWidth="Tablet"
-				demandPopin="true"
-				hAlign="Center">
-				<header>
-					<Text text="ロット" />
-				</header>
-			</Column>
-			<Column hAlign="Right">
-				<header>
-					<Text text="数量" />
-				</header>
-			</Column>
-		</columns>
-	</TableSelectDialog>
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+              <TableSelectDialog noDataText="No Products Found" title="Stock Product" search="handleSearch" confirm="handleClose" cancel="handleClose"
+                            items="{ path : '/StockCollection', sorter : { path : 'MATNR', descending : false, factory: '.columnFactory' } }">
+                            <ColumnListItem>
+                                          <cells>
+                                                        <ObjectIdentifier title="{MAKTX}" text="{MATNR}"/>
+                                                        <Text text="{WERKS}"/>
+                                                        <Text text="{LGORT}"/>
+                                                        <Text text="{CHARG}"/>
+                                                        <ObjectNumber
+                                                                      number="{ parts:[{path:'QUANT'}, {path:'CurrencyCode'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+                                                                      unit="{MEINS}"/>
+                                          </cells>
+                            </ColumnListItem>
+                            <columns>
+                                          <Column width="12em">
+                                                        <header>
+                                                                      <Text text="品名"/>
+                                                        </header>
+                                          </Column>
+                                          <Column minScreenWidth="Tablet" demandPopin="true">
+                                                        <header>
+                                                                      <Text text="プラント"/>
+                                                        </header>
+                                          </Column>
+                                          <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+                                                        <header>
+                                                                      <Text text="保管場所"/>
+                                                        </header>
+                                          </Column>
+                                          <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                                                        <header>
+                                                                      <Text text="ロット"/>
+                                                        </header>
+                                          </Column>
+                                          <Column hAlign="Right">
+                                                        <header>
+                                                                      <Text text="数量"/>
+                                                        </header>
+                                          </Column>
+                            </columns>
+              </TableSelectDialog>
 </core:FragmentDefinition>
