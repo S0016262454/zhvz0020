@@ -7,7 +7,7 @@
     "targetFolder": "dist",
     "sourceFolder": "webapp",
     "buildRequired": true,
-    "lastBuildDateTime": "Fri, 02 Dec 2016 23:33:02 GMT"
+    "lastBuildDateTime": "Fri, 16 Dec 2016 10:08:42 GMT"
   },
   "generation": [
     {
@@ -53,7 +53,7 @@
   "hcpdeploy": {
     "account": "cba8390ea",
     "name": "zhvz0020",
-    "lastVersionWeTriedToDeploy": "1.0.8"
+    "lastVersionWeTriedToDeploy": "1.0.9"
   },
   "mockpreview": {
     "mockUri": "/sap/opu/odata/SAP/ZODV0010_SRV/",

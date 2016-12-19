@@ -1,33 +1,29 @@
 <mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:suite="sap.suite.ui.commons" xmlns:commons="sap.ui.commons" xmlns:t="sap.ui.table" xmlns:ua="sap.uxap" xmlns="sap.m" xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" controllerName="zhvz0020.controller.zhvz0020_0010">
 	<App>
 		<pages>
-			<Page showHeader="false" enableScrolling="true" id="hoge"> 
-
-<!-- ヘッダー部 -->
+			<Page showHeader="false" enableScrolling="true" id="hoge">
+				<!-- ヘッダー部 -->
 				<subHeader>
 					<Toolbar>
 						<ToolbarSpacer/>
 						<SegmentedButton selectedKey="lab">
 							<items>
 								<SegmentedButtonItem icon="sap-icon://edit" text="{i18n>Edit}" press="onApproveDialog"/>
-								<SegmentedButtonItem icon="sap-icon://list" text="{i18n>List}" press="handleTableSelectDialogPress" />
+								<SegmentedButtonItem icon="sap-icon://list" text="{i18n>List}" press="handleTableSelectDialogPress"/>
 								<SegmentedButtonItem icon="sap-icon://display" key="competitor" text="{i18n>IndividualReference}" press="handleTableSelectDialogPress"/>
 								<SegmentedButtonItem icon="sap-icon://history" text="{i18n>HistoryReference}" press="handleTableSelectDialogPress"/>
 								<SegmentedButtonItem icon="sap-icon://favorite" text="{i18n>Favorite}" key="lab"/>
-								<SegmentedButtonItem icon="sap-icon://product" text="{i18n>StockDetermination}"/>
+								<SegmentedButtonItem icon="sap-icon://product" text="{i18n>StockDetermination}" press="handleTableSelectDialogPress2"/>
 							</items>
 						</SegmentedButton>
-						<Image src="/zhyi0010/images/head_logo.gif" height="30px">
-						</Image>
+						<Image src="/zhyi0010/images/head_logo.gif" height="30px"/>
 					</Toolbar>
 				</subHeader>
-
-<!-- コンテンツ部 -->
-<!-- ヘッダーフィールド -->
-
+				<!-- コンテンツ部 -->
+				<!-- ヘッダーフィールド -->
 				<ua:ObjectPageLayout id="ObjectPageLayout">
 					<ua:headerTitle>
-						<ua:ObjectPageHeader objectTitle="登録者" isObjectIconAlwaysVisible="false" objectSubtitle="清水　章孝　（開発部）">
+						<ua:ObjectPageHeader objectTitle="登録者" isObjectIconAlwaysVisible="false" objectSubtitle="清水 章孝 （開発部）">
 							<!--<ua:actions>-->
 							<!--	<ua:ObjectPageHeaderActionButton icon="sap-icon://pull-down" text="show section" type="Emphasized"/>-->
 							<!--	<ua:ObjectPageHeaderActionButton icon="sap-icon://show" text="show state" type="Emphasized"/>-->
@@ -36,62 +32,37 @@
 							<!--	<Link text="Page 1 a very long link" press="handleLink1Press"/>-->
 							<!--	<Link text="Page 2 long link" press="handleLink2Press"/>-->
 							<!--</ua:breadCrumbsLinks>-->
-				<ua:navigationBar>
-					<Bar>
-						<contentLeft>
-							<l:HorizontalLayout>
-								<l:content>
-										<Label text="処理タイプ："/>
-											<Select
-												showSecondaryValues= "false"
-												items="{
-													path: '/ProcessType',
-													sorter: { path: 'Key' }
-												}">
-												<core:ListItem key="{Key}" text="{Text}" additionalText= "{Value}"/>
-											</Select>
-										<Label text="伝票タイプ："/>
-											<Select
-												showSecondaryValues= "true"
-												items="{
-													path: '/Type',
-													sorter: { path: 'Key' }
-												}">
-												<core:ListItem key="{Key}" text="{Text}" additionalText= "{Value}"/>
-											</Select>
-										<Label text="伝票番号："/>
-											<SearchField
-												id="searchField" 
-												placeholder="伝票番号を入力してください..." 
-												enableSuggestions="true" 
-												search="onSearch" 
-												suggest="onSuggest" 
-												suggestionItems="{
-													path: '/Denpyou',
-													sorter: { path: 'key' }			
-												}"
-												width="100%">
-												<suggestionItems>
+							<ua:navigationBar>
+								<Bar>
+									<contentLeft>
+										<l:HorizontalLayout>
+											<l:content>
+												<Label text="処理タイプ："/>
+												<Select showSecondaryValues="false" items="{ path: '/ProcessType', sorter: { path: 'Key' } }">
+													<core:ListItem key="{Key}" text="{Text}" additionalText="{Value}"/>
+												</Select>
+												<Label text="伝票タイプ："/>
+												<Select showSecondaryValues="true" items="{ path: '/Type', sorter: { path: 'Key' } }">
+													<core:ListItem key="{Key}" text="{Text}" additionalText="{Value}"/>
+												</Select>
+												<Label text="伝票番号："/>
+												<SearchField id="searchField" placeholder="伝票番号を入力してください..." enableSuggestions="true" search="onSearch" suggest="onSuggest" suggestionItems="{ path: '/Denpyou', sorter: { path: 'key' } }" width="100%">
+													<suggestionItems>
 														<SuggestionItem text="{key}" description="{path:'TokuisakiCD'} ：{path:'Tokuisaki'} ：{path:'Date'} ：{path:'Type'} {path:'TypeText'}" key="{Key}"/>
-												</suggestionItems>
-											</SearchField>
-										<Label text="伝票日付："/>
-											<DatePicker
-												id="DP2"
-												value="2016-12-03" valueFormat="yyyy-MM-dd" displayFormat="long"
-												change="handleChange"
-												class="sapUiSmallMarginBottom"/>
-
-									<!--<ActionSelect id="searchField" class="sapUiSmallMarginBottom">-->
-									<!--	<items>-->
-									<!--		<core:Item key="{ProductId}" text="{Name}"/>-->
-									<!--	</items>-->
-									<!--</ActionSelect>-->
-								</l:content>
-							</l:HorizontalLayout>
-						</contentLeft>
-					</Bar>
-				</ua:navigationBar>
+													</suggestionItems>
+												</SearchField>
+												<Label text="伝票日付："/>
+												<DatePicker id="DP2" value="2016-12-03" valueFormat="yyyy-MM-dd" displayFormat="long" change="handleChange" class="sapUiSmallMarginBottom"/>
+												<!--<ActionSelect id="searchField" class="sapUiSmallMarginBottom">-->
+												<!--	<items>-->
+												<!--		<core:Item key="{ProductId}" text="{Name}"/>-->
+												<!--	</items>-->
+												<!--</ActionSelect>-->
+											</l:content>
+										</l:HorizontalLayout>
+									</contentLeft>
+								</Bar>
+							</ua:navigationBar>
 						</ua:ObjectPageHeader>
 					</ua:headerTitle>
 					<ua:sections>
@@ -99,10 +70,75 @@
 							<ua:subSections>
 								<ua:ObjectPageSubSection title="ヘッダー">
 									<l:VerticalLayout width="100%">
-										<IconTabBar id="idIconTabBarSeparatorNoIcon" expanded="false" class="sapUiResponsiveContentPadding">
+										<IconTabBar id="idIconTabBarSeparatorNoIcon" expanded="true" class="sapUiResponsiveContentPadding">
 											<items>
 												<!-- 受注共通 -->
-												<IconTabFilter id="icf0001" icon="sap-icon://hint" iconColor="Positive" text="受注共通">
+												<IconTabFilter id="Header001" icon="sap-icon://hint" iconColor="Positive" text="受注共通">
+													<VBox class="sapUiSmallMargin">
+														<f:Form id="FormToolbarCommon" editable="true" ariaLabelledBy="Title1">
+															<f:layout>
+																<f:ResponsiveGridLayout/>
+															</f:layout>
+															<f:formContainers>
+																<f:FormContainer ariaLabelledBy="Title2">
+																	<f:formElements>
+																		<f:FormElement label="受注先">
+																			<f:fields>
+																				<Input value="ID">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Input value="テキスト"/>
+																				<Input value="TEL"/>
+																				<Input value="FAX"/>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																	<f:formElements>
+																		<f:FormElement label="出荷先">
+																			<f:fields>
+																				<Input value="ID">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Input value="テキスト"/>
+																				<Input value="TEL"/>
+																				<Input value="FAX"/>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																	<f:formElements>
+																		<f:FormElement label="得意先発注No">
+																			<f:fields>
+																				<Input value="">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																</f:FormContainer>
+															</f:formContainers>
+														</f:Form>
+														<f:SimpleForm id="SimpleFormToolbarCommon" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="2" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="3" class="editableForm" minWidth="1024" maxContainerCols="3" editable="true">
+															<f:content>
+																<core:Title/>
+																<Label text="金額"/><Input value="" editable="false"/><Input value=""/>
+																<Label text="与信残額"/><Input value="" editable="false"/><Input value="%" editable="false"/>
+																<core:Title/>
+																<Label text="税額"/><Input value="" editable="false"/>
+																<Label text="支払条件"/><Input value=""/>
+																<core:Title/>
+																<Label text="レート"/><Input value=""/>
+															</f:content>
+														</f:SimpleForm>
+													</VBox>
+													<!--	sample		-->
+													<!--
+
 													<l:Grid binding="{/PersonCollection}" class="sapUiSmallMarginTop" hSpacing="2" defaultSpan="L6 M6 S10">
 														<l:content>
 															<f:SimpleForm editable="true">
@@ -114,8 +150,7 @@
 																<Text id="getValue"/>
 																<Label text="model.getProperty()"/>
 																<Text id="getProperty" text="{/InputValue}"/>
-															</f:SimpleForm>	
-															
+															</f:SimpleForm>
 															<f:SimpleForm editable="true">
 																<Label text="ValueLiveUpdate"/>
 																<Switch state="{/ValueLiveUpdate}"/>
@@ -125,343 +160,927 @@
 																<Text id="getValue2"/>
 																<Label text="model.getProperty()"/>
 																<Text id="getProperty2" text="{/InputValue}"/>
-																	<CheckBox id="text01" text="Option selected=false"/>
-																	<CheckBox text="Option selected=true"/>
-																	<CheckBox id="text02" text="Option enabled=true"/>
-																	<CheckBox text="Option enabled=false" enabled="false"/>
-																	<CheckBox text="NoneState" valueState="None"/>
-																	<CheckBox text="SuccessState" valueState="Success"/>
-																	<CheckBox text="Warning" valueState="Warning"/>
-																	<CheckBox text="Warning disabled selected" valueState="Warning" enabled="false" selected="true"/>
-																	<CheckBox text="Error" valueState="Error"/>
-																	<CheckBox text="Error disabled" valueState="Error" enabled="false" selected="true"/>
-																	
-																	<commons:TextField id="text03" imeMode="Active"/>
-																	<commons:TextField id="text04" imeMode="Inactive"/>
-		
-		
+																<CheckBox id="text01" text="Option selected=false"/>
+																<CheckBox text="Option selected=true"/>
+																<CheckBox id="text02" text="Option enabled=true"/>
+																<CheckBox text="Option enabled=false" enabled="false"/>
+																<CheckBox text="NoneState" valueState="None"/>
+																<CheckBox text="SuccessState" valueState="Success"/>
+																<CheckBox text="Warning" valueState="Warning"/>
+																<CheckBox text="Warning disabled selected" valueState="Warning" enabled="false" selected="true"/>
+																<CheckBox text="Error" valueState="Error"/>
+																<CheckBox text="Error disabled" valueState="Error" enabled="false" selected="true"/>
+																<commons:TextField id="text03" imeMode="Active"/>
+																<commons:TextField id="text04" imeMode="Inactive"/>
 																<Label text="売上金額"/>
-																<Input
-																	value="100,000"
-																	description="円"
-																	width="200px"
-																	fieldWidth="60%"
-																	class="sapUiSmallMarginBottom" />
-															</f:SimpleForm>	
+																<Input value="100,000" description="円" width="200px" fieldWidth="60%" class="sapUiSmallMarginBottom"/>
+															</f:SimpleForm>
 														</l:content>
 													</l:Grid>
+-->
 												</IconTabFilter>
 												<IconTabSeparator icon=""/>
 												<!-- 組織情報 -->
-												<IconTabFilter icon="sap-icon://attachment" iconColor="Neutral" count="3" text="組織情報">
-													<Text text="お試し４ブロック分割 ...★"/>
+												<IconTabFilter id="Header002" icon="sap-icon://attachment" iconColor="Neutral" count="3" text="組織情報">
 													<VBox class="sapUiSmallMargin">
-														<f:SimpleForm id="SimpleFormToolbar1" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="4" columnsM="4" class="editableForm" minWidth="1024" maxContainerCols="4" editable="true">
+														<f:SimpleForm id="SimpleFormToolbarOrganizationInformation" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="4" columnsM="4" class="editableForm" minWidth="1024" maxContainerCols="4" editable="true">
 															<f:content>
-																<core:Title text="第１ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																	<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ">
-																	</Input>
-																<core:Title text="第２ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																	<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ"/>
-																<core:Title text="第３ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																	<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ"/>
-																<core:Title text="第４ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																	<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ"/>
+																<core:Title/>
+																<Label text="プラント"/>
+																<Select showSecondaryValues="true" items="{ path: '/plnt', sorter: { path: 'Key' } }">
+																	<core:ListItem key="{Key}" text="{key}" additionalText=" {text}"/>
+																</Select>
+																<Label text="営業所"/>
+																<Select showSecondaryValues="true" items="{path: '/SalesOffice',sorter: { path: 'Key' }}">
+																	<core:ListItem key="{Key}" text="{key}" additionalText=" {text}"/>
+																</Select>
+																<Label text="購買組織"/>
+																<Select showSecondaryValues="true" items="{path: '/PurchasingOrganization',sorter: { path: 'Key' }}">
+																	<core:ListItem key="{Key}" text="{key}" additionalText=" {text}"/>
+																</Select>
+																<core:Title/>
+																<Label text="販売組織"/>
+																<Select showSecondaryValues="true" items="{path: '/SalesOrganization',sorter: { path: 'Key' }}">
+																	<core:ListItem key="{Key}" text="{key}" additionalText=" {text}"/>
+																</Select>
+																<Label text="営業G"/>
+																<Select showSecondaryValues="true" items="{path: '/SalesGroup',sorter: { path: 'Key' }}">
+																	<core:ListItem key="{Key}" text="{key}" additionalText=" {text}"/>
+																</Select>
+																<Label text="購買G"/>
+																<Select showSecondaryValues="true" items="{path: '/PurchasingGroup',sorter: { path: 'Key' }}">
+																	<core:ListItem key="{Key}" text="{key}" additionalText=" {text}"/>
+																</Select>
+																<core:Title/>
+																<Label text="流通チャネル"/>
+																<Select showSecondaryValues="true" items="{path: '/DistributionChannel',sorter: { path: 'Key' }}">
+																	<core:ListItem key="{Key}" text="{key}" additionalText=" {text}"/>
+																</Select>
+																<core:Title/>
+																<Label text="製品部門"/>
+																<Select showSecondaryValues="true" items="{path: '/ProductDivision',sorter: { path: 'Key' }}">
+																	<core:ListItem key="{Key}" text="{key}" additionalText=" {text}"/>
+																</Select>
 															</f:content>
 														</f:SimpleForm>
 													</VBox>
 												</IconTabFilter>
-												<!-- 取引先情報 -->
-												<IconTabFilter icon="sap-icon://notes" count="12" text="取引先情報">
-<!--													<ua:ObjectPageSection title="" showTitle="false">
-														<ua:subSections>
-															<ua:ObjectPageSubSection mode="Collapsed">
-																<ua:blocks>
-																	<f:SimpleForm maxContainerCols="2" editable="false" layout="ResponsiveGridLayout">
-																		<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																		<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																		<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ"/>
-																	</f:SimpleForm>
-																	<f:SimpleForm maxContainerCols="2" editable="false" layout="ResponsiveGridLayout">
-																	</f:SimpleForm>
-																	<f:SimpleForm maxContainerCols="2" editable="false" layout="ResponsiveGridLayout">
-																	</f:SimpleForm>
-										
-																</ua:blocks>
-															</ua:ObjectPageSubSection>
-															<ua:ObjectPageSubSection title="2 blocks" mode="Collapsed">
-																<ua:blocks>
-																	<f:SimpleForm maxContainerCols="2" title=" aaaaaaaa" editable="false" layout="ResponsiveGridLayout">
-																	</f:SimpleForm>
-																	<f:SimpleForm maxContainerCols="2" title=" aaaaaa" editable="false" layout="ResponsiveGridLayout">
-																 
-																	</f:SimpleForm>
-										
-																</ua:blocks>
-															</ua:ObjectPageSubSection>
-														</ua:subSections>
-													</ua:ObjectPageSection>
-													<Text text="People content goes here ..."/>
--->
-													<Text text="お試し３ブロック分割 ...★"/>
+												<IconTabFilter id="Header003" icon="sap-icon://notes" count="12" text="取引先情報">
 													<VBox class="sapUiSmallMargin">
-														<f:SimpleForm id="SimpleFormToolbar2" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="2" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="3" class="editableForm" minWidth="1024" maxContainerCols="3" editable="true">
-															<f:content>
-																<core:Title text="第１ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																	<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ">
-																	</Input>
-																<core:Title text="第２ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																	<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ"/>
-																<core:Title text="第３ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																	<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ"/>
-																<core:Title text="第４ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																	<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ"/>
-															</f:content>
-														</f:SimpleForm>
+														<f:Form id="FormToolbarSuppliers" editable="true" ariaLabelledBy="Title1">
+															<f:layout>
+																<f:ResponsiveGridLayout/>
+															</f:layout>
+															<f:formContainers>
+																<f:FormContainer ariaLabelledBy="Title2">
+																	<f:formElements>
+																		<f:FormElement>
+																			<f:fields>
+																				<Input value="ID" visible="false">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Input value="ID"/>
+																				<Input value="テキスト"/>
+																				<Input value="住所"/>
+																				<Input value="TEL"/>
+																				<Input value="FAX"/>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																	<f:formElements>
+																		<f:FormElement label="">
+																			<f:fields>
+																				<Input value="ID" visible="false">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Input value="ID"/>
+																				<Input value="テキスト"/>
+																				<Input value="住所"/>
+																				<Input value="TEL"/>
+																				<Input value="FAX"/>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																	<f:formElements>
+																		<f:FormElement label="">
+																			<f:fields>
+																				<Input value="ID">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Input value="テキスト"/>
+																				<Input value="住所"/>
+																				<Input value="TEL"/>
+																				<Input value="FAX"/>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																</f:FormContainer>
+															</f:formContainers>
+														</f:Form>
 													</VBox>
-
+													<VBox class="sapUiSmallMargin">
+														<f:Form id="FormToolbarSuppliers4" editable="true" ariaLabelledBy="Title1">
+															<f:layout>
+																<f:ResponsiveGridLayout/>
+															</f:layout>
+															<f:formContainers>
+																<f:FormContainer ariaLabelledBy="Title2">
+																	<f:formElements>
+																		<f:FormElement>
+																			<f:fields>
+																				<Input value="ID" visible="false">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Input value="ID"/>
+																				<Input value="テキスト"/>
+																				<Input value="住所"/>
+																				<Input value="TEL"/>
+																				<Input value="FAX"/>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																	<f:formElements>
+																		<f:FormElement>
+																			<f:fields>
+																				<Input value="ID" visible="false">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Input value="ID"/>
+																				<Input value="テキスト"/>
+																				<Input value="住所"/>
+																				<Input value="TEL"/>
+																				<Input value="FAX"/>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																	<f:formElements>
+																		<f:FormElement>
+																			<f:fields>
+																				<Input value="ID" visible="false">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Input value="ID"/>
+																				<Input value="テキスト"/>
+																				<Input value="住所"/>
+																				<Input value="TEL"/>
+																				<Input value="FAX"/>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																</f:FormContainer>
+															</f:formContainers>
+														</f:Form>
+													</VBox>
 												</IconTabFilter>
 												<IconTabSeparator icon=""/>
 												<!-- 備考 -->
-												<IconTabFilter icon="sap-icon://group" iconColor="Negative" text="備考">
-													<Text text="お試し２ブロック分割 ...★"/>
+												<IconTabFilter id="Header004" icon="sap-icon://group" iconColor="Negative" text="備考">
 													<VBox class="sapUiSmallMargin">
-														<f:SimpleForm id="SimpleFormToolbar3" layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="2" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" class="editableForm" minWidth="1024" maxContainerCols="2" editable="true">
+														<f:SimpleForm id="SimpleFormToolbarbikou" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="3" class="editableForm" minWidth="1024" maxContainerCols="3" editable="true">
 															<f:content>
-																<core:Title text="第１ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																	<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ">
-																	</Input>
-																<core:Title text="第２ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																	<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ"/>
-																<core:Title text="第３ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																	<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ"/>
-																<core:Title text="第４ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																	<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ"/>
+																<core:Title/>
+																<Label text=""/><CheckBox text="帳票" selected="false"/>
+																<Label text=""/><CheckBox text="分納不可" selected="false"/>
+																<Label text=""/><CheckBox text="個別請求" selected="false"/>
+																<Label text=""/><CheckBox text="専用納品書" selected="false"/>
+																<core:Title/>
+																<Label text="受注帳票備考"/><Input value=""/>
+																<Label text="出荷帳票備考"/><Input value=""/>
+																<Label text="請求帳票備考"/><Input value=""/>
+																<core:Title/>
+																<Label text="メモ"/>
+																<TextArea value="テキストエリア文字" rows="5"/>
 															</f:content>
 														</f:SimpleForm>
 													</VBox>
-
 												</IconTabFilter>
 												<IconTabSeparator icon=""/>
-												<!-- 輸出入情報 -->
-												<IconTabFilter icon="sap-icon://group" iconColor="Negative" text="輸出入情報">
+												<IconTabFilter id="Header005" icon="sap-icon://group" iconColor="Negative" text="輸出入情報">
+													<VBox class="sapUiSmallMargin">
+														<f:SimpleForm id="SimpleFormToolbarTrade" layout="ResponsiveGridLayout" labelSpanL="1" labelSpanM="2" emptySpanL="0" emptySpanM="0" columnsL="1" columnsM="1" class="editableForm" minWidth="1024" maxContainerCols="1" editable="true">
+															<f:content>
+																<core:Title/>
+																<Label text="SHIPPING COMPANY"/><Input value=""/>
+																<Label text="SHIPPED PER"/><Input value=""/>
+																<Label text="SHIPPED FROM"/><Input value=""/>
+																<Label text="SHIPPED TO"/><Input value=""/>
+																<Label text="VIA"/><Input value=""/>
+																<Label text="SHIPMENT"/><Input value=""/>
+																<Label text="ON OR ABOUT"/><Input value=""/>
+																<Label text="ETA"/><Input value=""/>
+																<Label text="ETD"/><Input value=""/>
+																<Label text="BOOKING NO"/><Input value=""/>
+																<Label text="BOOKING DATE"/><Input value=""/>
+																<Label text="CUSTOMS CLEARANCE DATE(SALES)"/><Input value=""/>
+																<Label text="CUSTOMS CLEARANCE DATE(P/O)"/><Input value=""/>
+																<Label text="REMARK1"/><Input value=""/>
+																<Label text="REMARK2"/><Input value=""/>
+																<Label text="REMARK3"/><Input value=""/>
+																<Label text="REMARK4"/><Input value=""/>
+																<Label text="REMARK5"/><Input value=""/>
+																<Label text="REMARK6"/><Input value=""/>
+																<Label text="REMARK7"/><Input value=""/>
+																<Label text="CASE MARK"/>
+																<TextArea value="テキストエリア文字" rows="5"/>
+															</f:content>
+														</f:SimpleForm>
+													</VBox>
+												</IconTabFilter>
+											</items>
+										</IconTabBar>
+									</l:VerticalLayout>
+								</ua:ObjectPageSubSection>
+							</ua:subSections>
+						</ua:ObjectPageSection>
+						<ua:ObjectPageSection title="明細入力">
+							<ua:subSections>
+								<ua:ObjectPageSubSection title=" ">
+									<l:VerticalLayout width="100%">
+										<IconTabBar id="idIconTabBarSeparatorNoIcon2" expanded="true" class="sapUiResponsiveContentPadding" selectedKey="00020" select="onTabSelectionChangeSelect" expand="onTabSelectionChangeExpand">
+											<items>
+												<IconTabFilter id="00010" icon="sap-icon://sales-order-item" iconColor="Positive" text="00010" key="00010">
+													<!-- お試しタブ -->
+													<IconTabBar id="idIconTabBarSeparatorNoIconL1" expanded="false" class="sapUiResponsiveContentPadding">
+														<items>
+															<IconTabFilter icon="sap-icon://hint" iconColor="Critical" text="Critical" count="333,333">
+																<Text text="Info content goes here ..."/>
+															</IconTabFilter>
+															<IconTabSeparator icon=""/>
+															<IconTabFilter icon="sap-icon://attachment" iconColor="Default" text="Default" count="3">
+																<Text text="Attachments go here ..."/>
+															</IconTabFilter>
+															<IconTabSeparator icon=""/>
+															<IconTabFilter icon="sap-icon://notes" iconColor="Negative" text="Negative" count="12">
+																<Text text="Notes go here ..."/>
+															</IconTabFilter>
+															<IconTabSeparator icon=""/>
+															<IconTabFilter icon="sap-icon://group" iconColor="Neutral" text="Neutral" count="3">
+																<Text text="People content goes here ..."/>
+															</IconTabFilter>
+															<IconTabSeparator icon=""/>
+															<IconTabFilter icon="sap-icon://message-popup" iconColor="Positive" text="Positive" count="3">
+																<Text text="message-popup ..."/>
+															</IconTabFilter>
+														</items>
+													</IconTabBar>
+												</IconTabFilter>
+												<IconTabSeparator icon=""/>
+												<IconTabFilter id="00020" icon="sap-icon://sales-order-item" iconColor="Neutral" text="明細" enabled="true" key="00020">
+													<VBox class="sapUiSmallMargin">
+														<Label text="----- FormTestStart -----"/>
+														<f:Form id="FormToolbar" editable="true" ariaLabelledBy="Title1">
+															<f:layout>
+																<f:ResponsiveGridLayout/>
+															</f:layout>
+															<f:formContainers>
+																<f:FormContainer ariaLabelledBy="Title2">
+																	<f:formElements>
+																		<f:FormElement>
+																			<f:fields>
+																				<Text textAlign="End" text="債務先">
+																					<layoutData>
+																						<l:GridData span="L1 M1 S2"/>
+																					</layoutData>
+																				</Text>
+																				<Input value="1000000000">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Text textAlign="End" text="明細カテゴリ">
+																					<layoutData>
+																						<l:GridData span="L1 M1 S2"/>
+																					</layoutData>
+																				</Text>
+																				<Select showSecondaryValues="true" ItemCategory="" items="{path: '/SalesItemCategory',sorter: { path: 'Key' }}">
+																					<core:ListItem key="{key}" text="{key}" additionalText="{text}"/>
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Select>
+																				<CheckBox text="削除" selected="false">
+																					<layoutData>
+																						<l:GridData span="L6 M6 S12"/>
+																					</layoutData>
+																				</CheckBox>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																	<f:formElements>
+																		<f:FormElement>
+																			<f:fields>
+																				<Text textAlign="End" text="品目">
+																					<layoutData>
+																						<l:GridData span="L1 M1 S2"/>
+																					</layoutData>
+																				</Text>
+																				<Input value="ZTEST0010">
+																					<layoutData>
+																						<l:GridData span="L1 M1 S2"/>
+																					</layoutData>
+																				</Input>
+																				<Input value="TEST">
+																					<layoutData>
+																						<l:GridData span="L3 M3 S6"/>
+																					</layoutData>
+																				</Input>
+																				<CheckBox text="引当可">
+																					<layoutData>
+																						<l:GridData span="L1 M1 S2"/>
+																					</layoutData>
+																				</CheckBox>
+																				<Button type="Default" text="在庫確認(ロット決定)">
+																					<layoutData>
+																						<l:GridData span="L6 M6 S12"/>
+																					</layoutData>
+																				</Button>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																	<f:formElements>
+																		<f:FormElement>
+																			<f:fields>
+																				<Text textAlign="End" text="プラント">
+																					<layoutData>
+																						<l:GridData span="L1 M1 S2"/>
+																					</layoutData>
+																				</Text>
+																				<Select showSecondaryValues="true" items="{ path: '/plnt', sorter: { path: 'Key' } }">
+																					<core:ListItem key="{Key}" text="{key}" additionalText=" {text}"/>
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Select>
+																				<Text textAlign="End" text="保管場所">
+																					<layoutData>
+																						<l:GridData span="L1 M1 S2"/>
+																					</layoutData>
+																				</Text>
+																				<Select showSecondaryValues="true" items="{ path: '/StorageLocation', sorter: { path: 'Key' } }">
+																					<core:ListItem key="{Key}" text="{key}" additionalText=" {text}"/>
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Select>
+																				<Text textAlign="End" text="ロット">
+																					<layoutData>
+																						<l:GridData span="L1 M1 S2"/>
+																					</layoutData>
+																				</Text>
+																				<Input value="">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Text textAlign="End" text="数量">
+																					<layoutData>
+																						<l:GridData span="L1 M1 S2"/>
+																					</layoutData>
+																				</Text>
+																				<Input value="10">
+																					<layoutData>
+																						<l:GridData span="L1 M1 S2"/>
+																					</layoutData>
+																				</Input>
+																				<Input value="">
+																					<layoutData>
+																						<l:GridData span="L1 M1 S2"/>
+																					</layoutData>
+																				</Input>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																</f:FormContainer>
+															</f:formContainers>
+														</f:Form>
+														<Label text="----- FormTestEnd -----"/>
+													</VBox>
+													<IconTabBar id="idIconTabBarSeparatorNoIconLOrders" expanded="false" class="sapUiResponsiveContentPadding">
+														<items>
+															<IconTabFilter text="受注情報">
+																<VBox class="sapUiSmallMargin">
+																	<f:SimpleForm id="SimpleFormToolbarmeisai" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="2" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="3" class="editableForm" minWidth="1024" maxContainerCols="3" editable="true">
+																		<f:content>
+																			<core:Title/>
+																			<Label text="出荷日"/>
+																			<DatePicker id="ShipDdate" value="2016-10-28" valueFormat="yyyy-MM-dd" displayFormat="long" change="handleChange"/>
+																			<Label text="単価"/>
+																			<Input value="300" description="JPY"/>
+																			<core:Title/>
+																			<Label text="希望納期"/>
+																			<DatePicker id="DesiredDeliveryDate" value="2016-10-30" valueFormat="yyyy-MM-dd" displayFormat="long" change="handleChange"/>
+																			<Label text="単価単位"/><Input value="1"/>
+																			<core:Title/>
+																			<Label text="回答納期"/>
+																			<DatePicker id="AnswerDeliveryDate" value="2016-10-30" valueFormat="yyyy-MM-dd" displayFormat="long" change="handleChange"/>
+																			<Label text="明細金額"/><Input value="30,000" description="JPY"/>
+																		</f:content>
+																	</f:SimpleForm>
+																</VBox>
+																<IconTabBar id="idIconTabBarSeparatorNoIconLRemark1" expanded="false" class="sapUiResponsiveContentPadding">
+																	<items>
+																		<IconTabFilter text="備考">
+																			<VBox class="sapUiSmallMargin">
+																				<f:Form id="5" editable="true" ariaLabelledBy="Title1">
+																					<f:layout>
+																						<f:ResponsiveGridLayout/>
+																					</f:layout>
+																					<f:formContainers>
+																						<f:FormContainer ariaLabelledBy="Title2">
+																							<f:formElements>
+																								<f:FormElement label="得意先品目">
+																									<f:fields>
+																										<Input value="ZTEST0010">
+																											<layoutData>
+																												<l:GridData span="L2 M2 S4"/>
+																											</layoutData>
+																										</Input>
+																										<Input value="TEST"/>
+																										<CheckBox text="納品名" selected="true"/>
+																									</f:fields>
+																								</f:FormElement>
+																							</f:formElements>
+																							<f:formElements>
+																								<f:FormElement label="得意先明細">
+																									<f:fields>
+																										<Input value="？？？？？">
+																											<layoutData>
+																												<l:GridData span="L2 M2 S4"/>
+																											</layoutData>
+																										</Input>
+																									</f:fields>
+																								</f:FormElement>
+																							</f:formElements>
+																						</f:FormContainer>
+																					</f:formContainers>
+																				</f:Form>
+																				<f:SimpleForm id="SimpleFormToolbarOrderRemark2" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" class="editableForm" minWidth="1024" maxContainerCols="2" editable="true">
+																					<f:content>
+																						<core:Title/>
+																						<CheckBox text="明細分納不可"/>
+																						<Label text="受注帳票行備考"/><Input value="受注帳票行備考受注帳票行備考"/>
+																						<Label text="出荷帳票行備考"/><Input value="出荷帳票行備考出荷帳票行備考"/>
+																						<Label text="請求帳票行備考"/>
+																						<Input value="請求帳票行備考請求帳票行備考"/>
+																						<core:Title/>
+																						<Label text="メモ"/>
+																						<TextArea value="テキストエリア文字" rows="5"/>
+																					</f:content>
+																				</f:SimpleForm>
+																			</VBox>
+																		</IconTabFilter>
+																	</items>
+																</IconTabBar>
+															</IconTabFilter>
+															<IconTabFilter text="発注情報">
+																<VBox class="sapUiSmallMargin">
+																	<f:Form id="1" editable="true" ariaLabelledBy="Title1">
+																		<f:layout>
+																			<f:ResponsiveGridLayout/>
+																		</f:layout>
+																		<f:formContainers>
+																			<f:FormContainer ariaLabelledBy="Title2">
+																				<f:formElements>
+																					<f:FormElement label="仕入先">
+																						<f:fields>
+																							<Input value="ID">
+																								<layoutData>
+																									<l:GridData span="L2 M2 S4"/>
+																								</layoutData>
+																							</Input>
+																							<Input value="テキスト"/>
+																							<Input value="TEL"/>
+																							<Input value="FAX"/>
+																						</f:fields>
+																					</f:FormElement>
+																				</f:formElements>
+																				<f:formElements>
+																					<f:FormElement label="債務先">
+																						<f:fields>
+																							<Input value="ID">
+																								<layoutData>
+																									<l:GridData span="L2 M2 S4"/>
+																								</layoutData>
+																							</Input>
+																							<Input value="テキスト"/>
+																							<Input value="TEL"/>
+																							<Input value="FAX"/>
+																						</f:fields>
+																					</f:FormElement>
+																				</f:formElements>
+																				<f:formElements>
+																					<f:FormElement label="仕入先品名">
+																						<f:fields>
+																							<Input value="ID">
+																								<layoutData>
+																									<l:GridData span="L6 M6 S8"/>
+																								</layoutData>
+																							</Input>
+																							<CheckBox text="発注名" selected="true"/>
+																						</f:fields>
+																					</f:FormElement>
+																				</f:formElements>
+																			</f:FormContainer>
+																		</f:formContainers>
+																	</f:Form>
+																	<f:SimpleForm id="SimpleFormToolbarPurchase3" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="2" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="3" class="editableForm" minWidth="1024" maxContainerCols="3" editable="true">
+																		<f:content>
+																			<core:Title/>
+																			<Label text="希望納期"/>
+																			<DatePicker id="DesiredDeliveryDate2" value="2016-10-29" valueFormat="yyyy-MM-dd" displayFormat="long" change="handleChange"/>
+																			<Label text="数量"/>
+																			<Input value="1"/>
+																			<core:Title/>
+																			<Label text="回答納期"/>
+																			<DatePicker id="AnswerDeliveryDate2" value="2016-10-29" valueFormat="yyyy-MM-dd" displayFormat="long" change="handleChange"/>
+																			<Label text="単価"/><Input value="100"/>
+																			<Label text="明細金額"/><Input value="100"/>
+																			<core:Title/>
+																			<Label text="単価単位"/><Input value="？？？"/>
+																		</f:content>
+																	</f:SimpleForm>
+																</VBox>
+																<IconTabBar id="idIconTabBarSeparatorNoIconLRemark2" expanded="false" class="sapUiResponsiveContentPadding">
+																	<items>
+																		<IconTabFilter text="備考">
+																			<f:SimpleForm id="SimpleFormToolbarOrderRemark3" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" class="editableForm" minWidth="1024" maxContainerCols="2" editable="true">
+																				<f:content>
+																					<core:Title/>
+																					<CheckBox text="納期回答指示"/>
+																					<CheckBox text="TA使用指示"/>
+																					<CheckBox text="明細分納不可指示"/>
+																					<Label text="発注帳票行備考"/>
+																					<Input value="発注帳票行備考発注帳票行備考"/>
+																					<core:Title/>
+																					<Label text="メモ"/>
+																					<TextArea value="テキストエリア文字" rows="5"/>
+																				</f:content>
+																			</f:SimpleForm>
+																		</IconTabFilter>
+																	</items>
+																</IconTabBar>
+															</IconTabFilter>
+														</items>
+													</IconTabBar>
+												</IconTabFilter>
+												<IconTabSeparator icon=""/>
+												<IconTabFilter id="00030" icon="sap-icon://sales-order-item" text="Form位置" key="00030">
+													<Text text="●●●●●開始位置揃え●●●●●"/>
+													<VBox class="sapUiSmallMargin">
+														<f:Form id="FormToolbarStartPosition1" editable="true" ariaLabelledBy="Title1">
+															<f:layout>
+																<f:ResponsiveGridLayout/>
+															</f:layout>
+															<f:formContainers>
+																<f:FormContainer ariaLabelledBy="Title2">
+																	<f:formElements>
+																		<f:FormElement>
+																			<f:fields>
+																				<Input value="ID" visible="false">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Input value="No"/>
+																				<Input value="明細カテゴリ"/>
+																				<CheckBox text="削除"/>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																</f:FormContainer>
+															</f:formContainers>
+														</f:Form>
+														<f:Form id="FormToolbarStartPosition" editable="true" ariaLabelledBy="Title1">
+															<f:layout>
+																<f:ResponsiveGridLayout/>
+															</f:layout>
+															<f:formContainers>
+																<f:FormContainer ariaLabelledBy="Title2">
+																	<f:formElements>
+																		<f:FormElement>
+																			<f:fields>
+																				<Input value="品目0" visible="true">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Input value="品目1" visible="false"/>
+																				<Input value="品目2"/>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																	<f:formElements>
+																		<f:FormElement>
+																			<f:fields>
+																				<Input value="ID" visible="false">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Input value="プラント"/>
+																				<Input value="保管場所"/>
+																				<Input value="ロット"/>
+																				<Input value="数量"/>
+																				<Input value="の横"/>
+																				<CheckBox text="引当可"/>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																</f:FormContainer>
+															</f:formContainers>
+														</f:Form>
+													</VBox>
+													<Text text="むりやりがんばる6分割？"/>
+													<VBox class="sapUiSmallMargin">
+														<f:SimpleForm id="StartPosition2" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="6" columnsM="6" class="editableForm" minWidth="1024" maxContainerCols="6" editable="true">
+															<f:content>
+																<core:Title/>
+																<Input value=""/><Label text="品目1"/>
+																<core:Title/>
+																<Label text="品目2"/><Input value=""/>
+																<core:Title/>
+																<Label text="品目3"/><Input value=""/>
+																<core:Title/>
+																<Label text="品目4"/><Input value=""/>
+																<core:Title/>
+																<Label text="品目5"/><Input value=""/>
+																<core:Title/>
+																<Label text="品目6"/><Input value=""/>
+															</f:content>
+															<f:content>
+																<core:Title/>
+																<Label text="品目7"/><CheckBox text=""/>
+																<core:Title/>
+																<Label text="品目8"/>
+																<Select showSecondaryValues="false" items="{ path: '/ProcessType', sorter: { path: 'Key' } }">
+																	<core:ListItem key="" text="" additionalText=""/>
+																</Select>
+																<core:Title/>
+																<CheckBox text="品目9"/>
+																<core:Title/>
+																<Label text="品目10"/><Input value=""/>
+																<core:Title/>
+																<Input value=""/>
+																<!--	品目11	-->
+																<core:Title/>
+																<Input value=""/><!--	品目12	--></f:content>
+														</f:SimpleForm>
+													</VBox>
+													<Text text="そろわない."/>
+													<VBox class="sapUiSmallMargin">
+														<f:Form id="FormToolbarStartPosition3" editable="true" ariaLabelledBy="Title1">
+															<f:layout>
+																<f:ResponsiveGridLayout/>
+															</f:layout>
+															<f:formContainers>
+																<f:FormContainer ariaLabelledBy="Title2">
+																	<f:formElements>
+																		<f:FormElement>
+																			<f:fields>
+																				<Input value="ID" visible="false">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Input value="No"/>
+																				<Input value="明細カテゴリ"/>
+																				<CheckBox text="削除"/>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																</f:FormContainer>
+															</f:formContainers>
+														</f:Form>
+														<f:Form id="FormToolbarStartPosition4" editable="true" ariaLabelledBy="Title1">
+															<f:layout>
+																<f:ResponsiveGridLayout/>
+															</f:layout>
+															<f:formContainers>
+																<f:FormContainer ariaLabelledBy="Title2">
+																	<f:formElements>
+																		<f:FormElement>
+																			<f:fields>
+																				<Input value="品目0" visible="false">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Label text="Label text品目1"/>
+																				<Input value="品目1"/>
+																				<Label text="品目2"/>
+																				<Input value="品目2"/>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																	<f:formElements>
+																		<f:FormElement label="FormElementプラント">
+																			<f:fields>
+																				<Input value="プラント">
+																					<layoutData>
+																						<l:GridData span="L2 M2 S4"/>
+																					</layoutData>
+																				</Input>
+																				<Label text="Label text保管場所"/>
+																				<Input value="保管場所"/>
+																				<Input value="ロット"/>
+																				<Input value="数量"/>
+																				<Input value="の横"/>
+																				<CheckBox text="引当可"/>
+																			</f:fields>
+																		</f:FormElement>
+																	</f:formElements>
+																</f:FormContainer>
+															</f:formContainers>
+														</f:Form>
+													</VBox>
+												</IconTabFilter>
+												<IconTabSeparator icon=""/>
+												<IconTabFilter id="00040" icon="sap-icon://sales-order-item" iconColor="Negative" text="00040" key="00040">
 													<Text text="お試し１ブロック分割 ...★"/>
 													<VBox class="sapUiSmallMargin">
 														<f:SimpleForm id="SimpleFormToolbar4" layout="ResponsiveGridLayout" labelSpanL="1" labelSpanM="2" emptySpanL="0" emptySpanM="0" columnsL="1" columnsM="1" class="editableForm" minWidth="1024" maxContainerCols="1" editable="true">
 															<f:content>
 																<core:Title text="第１ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678"/>
-																	<Label text="2 あああああ"/><Input value="１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４">
-																	</Input>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678"/>
+																<Label text="33333"/>
+																<Input value="１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４"/>
 																<core:Title text="第２ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																	<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ"/>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="い"/>
+																<Label text="33333"/><Input value="う"/>
 																<core:Title text="第３ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																	<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ"/>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="い"/>
+																<Label text="33333"/><Input value="う"/>
 																<core:Title text="第４ブロック"/>
-																	<Label text="1 Laaa"/><Input value="1 Iaaa"/>
-																	<Label text="2 Lbbbbbbbbb"/><Input value="2 Ibbbbb23oihd"/>
-																	<Label text="2 あああああ"/><Input value="2 Ibbbbほぢｗｊ"/>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="い"/>
+																<Label text="33333"/><Input value="う"/>
 															</f:content>
 														</f:SimpleForm>
 													</VBox>
-
+												</IconTabFilter>
+												<IconTabSeparator icon=""/>
+												<IconTabFilter id="00050" icon="sap-icon://sales-order-item" iconColor="Negative" text="00050" key="00050">
+													<Text text="お試し２ブロック分割 ...★"/>
+													<VBox class="sapUiSmallMargin">
+														<f:SimpleForm id="SimpleFormToolbar3" layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="2" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" class="editableForm" minWidth="1024" maxContainerCols="2" editable="true">
+															<f:content>
+																<core:Title text="第１ブロック"/>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678"/>
+																<Label text="33333"/>
+																<Input value="１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４"/>
+																<core:Title text="第２ブロック"/>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="い"/>
+																<Label text="33333"/><Input value="う"/>
+																<core:Title text="第３ブロック"/>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="い"/>
+																<Label text="33333"/><Input value="う"/>
+																<core:Title text="第４ブロック"/>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="い"/>
+																<Label text="33333"/><Input value="う"/>
+															</f:content>
+														</f:SimpleForm>
+													</VBox>
+												</IconTabFilter>
+												<IconTabSeparator icon=""/>
+												<IconTabFilter id="00060" icon="sap-icon://sales-order-item" iconColor="Negative" text="00060" key="00060">
+													<Text text="お試し３ブロック分割 ...★"/>
+													<VBox class="sapUiSmallMargin">
+														<f:SimpleForm id="SimpleFormToolbar2" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="2" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="3" class="editableForm" minWidth="1024" maxContainerCols="3" editable="true">
+															<f:content>
+																<core:Title text="第１ブロック"/>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678"/>
+																<Label text="33333"/>
+																<Input value="１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４"/>
+																<core:Title text="第２ブロック"/>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="い"/>
+																<Label text="33333"/><Input value="う"/>
+																<core:Title text="第３ブロック"/>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="い"/>
+																<Label text="33333"/><Input value="う"/>
+																<core:Title text="第４ブロック"/>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="い"/>
+																<Label text="33333"/><Input value="う"/>
+															</f:content>
+														</f:SimpleForm>
+													</VBox>
+												</IconTabFilter>
+												<IconTabSeparator icon=""/>
+												<IconTabFilter id="00070" icon="sap-icon://sales-order-item" iconColor="Negative" text="00070" key="00070">
+													<Text text="お試し４ブロック分割 ...★"/>
+													<VBox class="sapUiSmallMargin">
+														<f:SimpleForm id="SimpleFormToolbar1" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="4" columnsM="4" class="editableForm" minWidth="1024" maxContainerCols="4" editable="true">
+															<f:content>
+																<core:Title text="第１ブロック"/>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678"/>
+																<Label text="33333"/>
+																<Input value="１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４"/>
+																<core:Title text="第２ブロック"/>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="い"/>
+																<Label text="33333"/><Input value="う"/>
+																<core:Title text="第３ブロック"/>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="い"/>
+																<Label text="33333"/><Input value="う"/>
+																<core:Title text="第４ブロック"/>
+																<Label text="11111"/><Input value="あ"/>
+																<Label text="22222"/><Input value="い"/>
+																<Label text="33333"/><Input value="う"/>
+															</f:content>
+														</f:SimpleForm>
+													</VBox>
 												</IconTabFilter>
 											</items>
-										</IconTabBar> 
+										</IconTabBar>
 									</l:VerticalLayout>
 								</ua:ObjectPageSubSection>
 							</ua:subSections>
 						</ua:ObjectPageSection>
-<!-- 明細入力 -->
-						<ua:ObjectPageSection title="明細入力">
-							<ua:subSections>
-								<ua:ObjectPageSubSection title=" ">
-									<l:VerticalLayout width="100%">
-										<IconTabBar id="idIconTabBarSeparatorNoIcon2" expanded="false" class="sapUiResponsiveContentPadding">
-											<items>
-												<IconTabFilter icon="sap-icon://sales-order-item" iconColor="Positive" text="00010">
-														<!-- お試しタブ -->
-														<IconTabBar id="idIconTabBarSeparatorNoIconL1" expanded="false" class="sapUiResponsiveContentPadding">
-															<items>
-																<IconTabFilter icon="sap-icon://hint" iconColor="Critical" text="Critical" count="333,333">
-																	<Text text="Info content goes here ..."/>
-																</IconTabFilter>
-																<IconTabSeparator icon=""/>
-																<IconTabFilter icon="sap-icon://attachment" iconColor="Default" text="Default" count="3">
-																	<Text text="Attachments go here ..."/>
-																</IconTabFilter>
-																<IconTabSeparator icon=""/>
-																<IconTabFilter icon="sap-icon://notes" iconColor="Negative" text="Negative" count="12">
-																	<Text text="Notes go here ..."/>
-																</IconTabFilter>
-																<IconTabSeparator icon=""/>
-																<IconTabFilter icon="sap-icon://group" iconColor="Neutral" text="Neutral" count="3">
-																	<Text text="People content goes here ..."/>
-																</IconTabFilter>
-																<IconTabSeparator icon=""/>
-																<IconTabFilter icon="sap-icon://message-popup" iconColor="Positive" text="Positive" count="3">
-																	<Text text="message-popup ..."/>
-																</IconTabFilter>
-															</items>
-														</IconTabBar>
-													</IconTabFilter>
-												<IconTabSeparator icon=""/>
-												<IconTabFilter icon="sap-icon://sales-order-item" iconColor="Neutral" text="00020">
-													<Text text="People content goes here ..."/>
-												</IconTabFilter>
-												<IconTabSeparator icon=""/>
-												<IconTabFilter icon="sap-icon://sales-order-item" text="00030">
-													<Text text="People content goes here ..."/>
-												</IconTabFilter>
-												<IconTabSeparator icon=""/>
-												<IconTabFilter icon="sap-icon://sales-order-item" iconColor="Negative" text="00040">
-													<Text text="People content goes here ..."/>
-												</IconTabFilter>
-												<IconTabSeparator icon=""/>
-												<IconTabFilter icon="sap-icon://sales-order-item" iconColor="Negative" text="00050">
-													<Text text="People content goes here ..."/>
-												</IconTabFilter>
-											</items>
-										</IconTabBar> 
-									</l:VerticalLayout>
-								</ua:ObjectPageSubSection>
-							</ua:subSections>
-						</ua:ObjectPageSection>
-<!-- 明細一覧 -->
+						<!-- 明細一覧 -->
 						<ua:ObjectPageSection title="明細一覧">
 							<ua:subSections>
 								<ua:ObjectPageSubSection title=" ">
-										<Table id="idProductsTable"
-											inset="true"
-											items="{
-												path: '/Meisai',
-												sorter: {
-													path: 'POSNR'
-												}
-											}">
-											<headerToolbar>
-												<Toolbar>
-													<Title text="明細一覧" level="H2"/>
-													<ToolbarSpacer></ToolbarSpacer>
-													<Button	icon="sap-icon://download" press="onDataExport" />
-												</Toolbar>
-											</headerToolbar>
-											<columns>
-												<Column
-													id="POSNR"
-													width="12em">
-													<Text text="明細No." />
-												</Column>
-												<Column
-													id="ZZITEM"
-													minScreenWidth="Tablet"
-													demandPopin="true">
-													<Text text="品番" />
-												</Column>
-												<Column
-													id="ZZMAKER"
-													minScreenWidth="Tablet"
-													demandPopin="true"
-													hAlign="End">
-													<Text text="メーカー" />
-												</Column>
-												<Column
-													id="ZZSIZE"
-													minScreenWidth="Tablet"
-													demandPopin="true"
-													hAlign="Center">
-													<Text text="サイズ" />
-												</Column>
-												<Column
-													id="ZZSIZEUNIT"
-													minScreenWidth="Tablet"
-													demandPopin="true"
-													hAlign="Center">
-													<Text text="サイズ単位" />
-												</Column>
-												<Column
-													id="LGORT"
-													minScreenWidth="Tablet"
-													demandPopin="true"
-													hAlign="Center">
-													<Text text="保管場所" />
-												</Column>
-												<Column
-													id="CHARG"
-													minScreenWidth="Tablet"
-													demandPopin="true"
-													hAlign="Center">
-													<Text text="ロット" />
-												</Column>
-												<Column
-													id="KWMENG"
-													hAlign="End">
-													<Text text="受注数量" />
-												</Column>
-											</columns>
-											<items>
-												<ColumnListItem>
-													<cells>
-					<ObjectIdentifier
-						title="{POSNR}"
-						text="{Kunnr}" />
-														<Text
-															text="{ZZITEM}" />
-														<Text
-															text="{ZZMAKER}" />
-														<Text
-															text="{ZZSIZE}" />
-														<Text
-															text="{ZZSIZEUNIT}" />
-														<Text
-															text="{LGORT}" />
-														<Text
-															text="{CHARG}" />
-														<ObjectNumber
-															number="{KWMENG}"
-															unit="個"
-															/>
-													</cells>
-												</ColumnListItem>
-											</items>
-										</Table>
+									<!--	コメントアウトにしているRowSelectionChange="onRowSelectionChange"があるようなものを後に書く	-->
+									<!--<Table id="idProductsTable" inset="true" items="{ path: '/Meisai', sorter: { path: 'POSNR' } }" rowSelectionChange="onRowSelectionChange">-->
+									<Table id="idProductsTable" inset="true" items="{ path: '/Meisai', sorter: { path: 'POSNR' } }">
+										<headerToolbar>
+											<Toolbar>
+												<Title text="明細一覧" level="H2"/>
+												<ToolbarSpacer/>
+												<Button icon="sap-icon://download" press="onDataExport"/>
+											</Toolbar>
+										</headerToolbar>
+										<columns>
+											<Column id="POSNR" width="12em">
+												<Text text="明細No."/>
+											</Column>
+											<Column id="ZZITEM" minScreenWidth="Tablet" demandPopin="true">
+												<Text text="品番"/>
+											</Column>
+											<Column id="ZZMAKER" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+												<Text text="メーカー"/>
+											</Column>
+											<Column id="ZZSIZE" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+												<Text text="サイズ"/>
+											</Column>
+											<Column id="ZZSIZEUNIT" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+												<Text text="サイズ単位"/>
+											</Column>
+											<Column id="LGORT" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+												<Text text="保管場所"/>
+											</Column>
+											<Column id="CHARG" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+												<Text text="ロット"/>
+											</Column>
+											<Column id="KWMENG" hAlign="End">
+												<Text text="受注数量"/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem type="Active" press="onSelectionListChange">
+												<cells>
+													<ObjectIdentifier title="{POSNR}" text="{Kunnr}"/>
+													<Text text="{ZZITEM}"/>
+													<Text text="{ZZMAKER}"/>
+													<Text text="{ZZSIZE}"/>
+													<Text text="{ZZSIZEUNIT}"/>
+													<Text text="{LGORT}"/>
+													<Text text="{CHARG}"/>
+													<ObjectNumber number="{KWMENG}" unit="個"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
 								</ua:ObjectPageSubSection>
 							</ua:subSections>
 						</ua:ObjectPageSection>
 					</ua:sections>
 				</ua:ObjectPageLayout>
-
-
-<!-- フッター部 -->
+				<!-- フッター部 -->
 				<footer>
 					<OverflowToolbar id="otbFooter">
 						<ToolbarSpacer/>

@@ -4,9 +4,6 @@
             "name": "Component.js"
         },
         {
-            "name": "extended_runnable_file.html"
-        },
-        {
             "name": "css/zhvz0020_0010.css"
         },
         {
@@ -54,7 +51,13 @@
             "name": "mockdata/Category.json"
         },
         {
+            "name": "view/Dialog2.fragment.xml"
+        },
+        {
             "name": "view/Dialog.fragment.xml"
+        },
+        {
+            "name": "view/Dialog3.fragment.xml"
         },
         {
             "name": "view/zhvz0020_0010.view.xml"

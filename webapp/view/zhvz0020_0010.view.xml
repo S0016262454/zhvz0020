@@ -439,7 +439,6 @@
 												<IconTabSeparator icon=""/>
 												<IconTabFilter id="00020" icon="sap-icon://sales-order-item" iconColor="Neutral" text="明細" enabled="true" key="00020">
 													<VBox class="sapUiSmallMargin">
-														<Label text="----- FormTestStart -----"/>
 														<f:Form id="FormToolbar" editable="true" ariaLabelledBy="Title1">
 															<f:layout>
 																<f:ResponsiveGridLayout/>
@@ -472,9 +471,14 @@
 																				</Select>
 																				<CheckBox text="削除" selected="false">
 																					<layoutData>
-																						<l:GridData span="L6 M6 S12"/>
+																						<l:GridData span="L2 M2 S4"/>
 																					</layoutData>
 																				</CheckBox>
+																				<Text textAlign="End" >
+																					<layoutData>
+																						<l:GridData span="L4 M4 S8"/>
+																					</layoutData>
+																				</Text>
 																			</f:fields>
 																		</f:FormElement>
 																	</f:formElements>
@@ -501,11 +505,16 @@
 																						<l:GridData span="L1 M1 S2"/>
 																					</layoutData>
 																				</CheckBox>
-																				<Button type="Default" text="在庫確認(ロット決定)">
+																				<Button type="Default" text="在庫確認(ロット決定)" press="handleTableSelectDialogPress2">
 																					<layoutData>
-																						<l:GridData span="L6 M6 S12"/>
+																						<l:GridData span="L2 M2 S4"/>
 																					</layoutData>
 																				</Button>
+																				<Text textAlign="End" >
+																					<layoutData>
+																						<l:GridData span="L4 M4 S8"/>
+																					</layoutData>
+																				</Text>
 																			</f:fields>
 																		</f:FormElement>
 																	</f:formElements>
@@ -565,11 +574,10 @@
 																</f:FormContainer>
 															</f:formContainers>
 														</f:Form>
-														<Label text="----- FormTestEnd -----"/>
 													</VBox>
-													<IconTabBar id="idIconTabBarSeparatorNoIconLOrders" expanded="false" class="sapUiResponsiveContentPadding">
+													<IconTabBar id="idIconTabBarSeparatorNoIconLOrders" expanded="true" selectedKey="Order" class="sapUiResponsiveContentPadding">
 														<items>
-															<IconTabFilter text="受注情報">
+															<IconTabFilter text="受注情報" key="Receive">
 																<VBox class="sapUiSmallMargin">
 																	<f:SimpleForm id="SimpleFormToolbarmeisai" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="2" emptySpanL="0" emptySpanM="0" columnsL="3" columnsM="3" class="editableForm" minWidth="1024" maxContainerCols="3" editable="true">
 																		<f:content>
@@ -644,7 +652,7 @@
 																	</items>
 																</IconTabBar>
 															</IconTabFilter>
-															<IconTabFilter text="発注情報">
+															<IconTabFilter text="発注情報" key="Order">
 																<VBox class="sapUiSmallMargin">
 																	<f:Form id="1" editable="true" ariaLabelledBy="Title1">
 																		<f:layout>
@@ -712,12 +720,10 @@
 																		</f:content>
 																	</f:SimpleForm>
 																</VBox>
-																<IconTabBar id="idIconTabBarSeparatorNoIconLRemark2" expanded="false" class="sapUiResponsiveContentPadding">
-																	<items>
-																		<IconTabFilter text="備考">
+																<Panel id="idIconTabBarSeparatorNoIconLRemark2" expandable="true" expanded="true" headerText="備考" width="auto" class="sapUiResponsiveMargin">
+																	<content>
 																			<f:SimpleForm id="SimpleFormToolbarOrderRemark3" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="2" class="editableForm" minWidth="1024" maxContainerCols="2" editable="true">
 																				<f:content>
-																					<core:Title/>
 																					<CheckBox text="納期回答指示"/>
 																					<CheckBox text="TA使用指示"/>
 																					<CheckBox text="明細分納不可指示"/>
@@ -728,9 +734,8 @@
 																					<TextArea value="テキストエリア文字" rows="5"/>
 																				</f:content>
 																			</f:SimpleForm>
-																		</IconTabFilter>
-																	</items>
-																</IconTabBar>
+																	</content>
+																</Panel>
 															</IconTabFilter>
 														</items>
 													</IconTabBar>

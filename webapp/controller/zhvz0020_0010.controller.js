@@ -1,5 +1,5 @@
 jQuery.sap.registerModulePath("zhyi0010", "/zhyi0010");
-jQuery.sap.require("zhyi0010.commons.zhyi0010_0010_commons");
+//jQuery.sap.require("zhyi0010.commons.zhyi0010_0010_commons");
 
 jQuery.sap.includeStyleSheet('/zhyi0010/css/zhyi0010_0010.css');
 
@@ -16,7 +16,7 @@ sap.ui.define([
 	'sap/ui/core/util/Export',
 	'sap/ui/core/util/ExportTypeCSV',
 	'zhvz0020/model/Formatter',
-	"zhyi0010/commons/zhyi0010_0010_commons",
+	"zhyi0010/commons/zhyi0010_0010.commons",
 	'sap/ui/model/Filter',
 	"sap/ui/model/FilterOperator",
 	"sap/ui/unified/Currency",
@@ -49,9 +49,9 @@ sap.ui.define([
 	//	 src : "/zhyi0010/images/hoimi.jpg"
 	// });
 
-	jQuery.sap.log.setLevel(jQuery.sap.log.Level.ERROR);
+	jQuery.sap.log.setLevel(jQuery.sap.log.Level.WARNING);
 
-	jQuery.sap.log.warning("This should never have happened!");
+	jQuery.sap.log.warning("This should never have happened!" + commons.getHogeHoge());
 
 	/*	var sText = oBundle.getText("appTitle");
 		
@@ -176,7 +176,7 @@ sap.ui.define([
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
 			this._oDialog.open();
 		},
-//----------------------------↓ここから↓----------------------------
+		//----------------------------↓ここから↓----------------------------
 		//在庫決定が押されたとき
 		handleTableSelectDialogPress2: function(oEvent) {
 			if (!this._oDialog2) {
@@ -197,7 +197,7 @@ sap.ui.define([
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog2);
 			this._oDialog2.open();
 		},
-//----------------------------↓さらにここから(search)↓----------------------------
+		//----------------------------↓さらにここから(search)↓----------------------------
 		//検索（全項目から）
 		handleSearch: function(oEvent) {
 			var sValue = oEvent.getParameter("value");
@@ -231,140 +231,141 @@ sap.ui.define([
 			var oBinding = oEvent.getSource().getBinding("items");
 			oBinding.filter(filters);
 		},
-//----------------------------↓さらにここから(明細入力/明細一覧連動)↓----------------------------
+		//----------------------------↓さらにここから(明細入力/明細一覧連動)↓----------------------------
 
-onSelectionListChange : function(oEvent){
-	//あとで
-		var sValue = oEvent.getParameter("value");
-	
-},
-onTabSelectionChangeExpand : function(oEvent){
-	
-	var eGetParameter = oEvent.getParameter("selectedKey");
-	
-	jQuery.sap.log.setLevel(jQuery.sap.log.Level.WARNING);
-	jQuery.sap.log.warning("Expand：getApplyContentPadding = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getApplyContentPadding());
-	jQuery.sap.log.warning("Expand：getBackgroundDesign = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getBackgroundDesign());
-	jQuery.sap.log.warning("Expand：getContent = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getContent());
-	jQuery.sap.log.warning("Expand：getExpandable = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getExpandable());
-	jQuery.sap.log.warning("Expand：getExpanded = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getExpanded());
-	jQuery.sap.log.warning("Expand：getHeaderMode = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getHeaderMode());
-	jQuery.sap.log.warning("Expand：getItems = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getItems());
-	jQuery.sap.log.warning("Expand：getSelectedKey = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getSelectedKey());
-	jQuery.sap.log.warning("Expand：getShowOverflowSelectList = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getShowOverflowSelectList());
-	jQuery.sap.log.warning("Expand：getStretchContentHeight = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getStretchContentHeight());
-	jQuery.sap.log.warning("Expand：getUpperCase = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getUpperCase());
+		onSelectionListChange: function(oEvent) {
+			//あとで
+			var sValue = oEvent.getParameter("value");
 
+		},
+		onTabSelectionChangeExpand: function(oEvent) {
 
-},
-onTabSelectionChangeSelect : function(oEvent){
-	
-	var sGetParameter = oEvent.getParameter("selectedKey");
-	
-	jQuery.sap.log.setLevel(jQuery.sap.log.Level.WARNING);
-	jQuery.sap.log.warning("Select：getApplyContentPadding = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getApplyContentPadding());
-	jQuery.sap.log.warning("Select：getBackgroundDesign = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getBackgroundDesign());
-	jQuery.sap.log.warning("Select：getContent = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getContent());
-	jQuery.sap.log.warning("Select：getExpandable = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getExpandable());
-	jQuery.sap.log.warning("Select：getExpanded = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getExpanded());
-	jQuery.sap.log.warning("Select：getHeaderMode = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getHeaderMode());
-	jQuery.sap.log.warning("Select：getItems = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getItems());
-	jQuery.sap.log.warning("Select：getSelectedKey = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getSelectedKey());
-	jQuery.sap.log.warning("Select：getShowOverflowSelectList = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getShowOverflowSelectList());
-	jQuery.sap.log.warning("Select：getStretchContentHeight = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getStretchContentHeight());
-	jQuery.sap.log.warning("Select：getUpperCase = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getUpperCase());
+			var eGetParameter = oEvent.getParameter("selectedKey");
 
-},
+			jQuery.sap.log.setLevel(jQuery.sap.log.Level.WARNING);
+			jQuery.sap.log.warning("Expand：getApplyContentPadding = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getApplyContentPadding());
+			jQuery.sap.log.warning("Expand：getBackgroundDesign = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getBackgroundDesign());
+			jQuery.sap.log.warning("Expand：getContent = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getContent());
+			jQuery.sap.log.warning("Expand：getExpandable = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getExpandable());
+			jQuery.sap.log.warning("Expand：getExpanded = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getExpanded());
+			jQuery.sap.log.warning("Expand：getHeaderMode = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getHeaderMode());
+			jQuery.sap.log.warning("Expand：getItems = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getItems());
+			jQuery.sap.log.warning("Expand：getSelectedKey = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getSelectedKey());
+			jQuery.sap.log.warning("Expand：getShowOverflowSelectList = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2"))
+				.getShowOverflowSelectList());
+			jQuery.sap.log.warning("Expand：getStretchContentHeight = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getStretchContentHeight());
+			jQuery.sap.log.warning("Expand：getUpperCase = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getUpperCase());
 
-// //----------------------------↓さらにここから(sort)↓----------------------------
-//ちょっとおいておく
-// 		columnFactory : function(sId, oContext) {
-// 			var oModel = this.getView().getModel();
-// 			var sName = oContext.getProperty("name");
-// 			var sType = oContext.getProperty("type");
-// 			var sSemantics = oContext.getProperty("sap:semantics");
-// 			var bVisible = oContext.getProperty("sap:visible") != "false";
-// 			var iLen = oContext.getProperty("maxLength");
-// 			iLen = iLen ? parseInt(iLen, 10) : 10;
- 
-// 			function specialTemplate() {
-// 				var sUnit = oContext.getProperty("sap:unit");
-// 				if (sUnit) {
-// 					var sUnitType = oModel.getMetaModel().getMetaContext("/ProductSet/" + sUnit).getProperty()["sap:semantics"];
-// 					if (sUnitType == "currency-code") {
-// 						return new Currency({value: {path: sName, type: new String()}, currency: {path: sName}});
-// 					}
-// 				}
-// 				return null;
-// 			}
- 
-// 			return new Column(sId, {
-// 				visible: bVisible && sSemantics != "unit-of-measure" && sSemantics != "currency-code",
-// 				sortProperty:  sName ,
-// 				filterProperty: oContext.getProperty("sap:filterable") == "true" ? sName : null,
-// 				width: (iLen > 9 ? (iLen > 50 ? 15 : 10) : 5) + "rem",
-// 				label: new sap.m.Label({text: "{/#Product/" + sName + "/@sap:label}"}),
-// 				hAlign: sType && sType.indexOf("Decimal") >= 0 ? "End" : "Begin",
-// 				template: specialTemplate() || new Text({text: {path: sName}})
-// 			});
-// 		},
+		},
+		onTabSelectionChangeSelect: function(oEvent) {
 
-//----------------------------↓さらにここから(sort(ぽっぷあっぷver.))↓----------------------------
-// onExit : function () {
-// 			if (this._oDialog3) {
-// 				this._oDialog3.destroy();
-// 			}
-// 		},
- 
-// 		handleViewSettingsDialogButtonPressed: function (oEvent) {
-// 			if (!this._oDialog3) {
-// 				this._oDialog3 = sap.ui.xmlfragment("zhvz0020.view.Dialog3", this);
-// 			}
-// 			// toggle compact style
-// 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog3);
-// 			this._oDialog3.open();
-// 		},
- 
-// 		handleConfirm: function(oEvent) {
- 
-// 			var oView = this.getView();
-// 			var oTable = oView.byId("idProductsTable");
- 
-// 			var mParams = oEvent.getParameters();
-// 			var oBinding = oTable.getBinding("items");
- 
-// 			// apply sorter to binding
-// 			// (grouping comes before sorting)
-// 			var aSorters = [];
-// 			if (mParams.groupItem) {
-// 				var sPath = mParams.groupItem.getKey();
-// 				var bDescending = mParams.groupDescending;
-// 				var vGroup = this.mGroupFunctions[sPath];
-// 				aSorters.push(new Sorter(sPath, bDescending, vGroup));
-// 			}
-// 			var sPath = mParams.sortItem.getKey();
-// 			var bDescending = mParams.sortDescending;
-// 			aSorters.push(new Sorter(sPath, bDescending));
-// 			oBinding.sort(aSorters);
- 
-// 			// apply filters to binding
-// 			var aFilters = [];
-// 			jQuery.each(mParams.filterItems, function (i, oItem) {
-// 				var aSplit = oItem.getKey().split("___");
-// 				var sPath = aSplit[0];
-// 				var sOperator = aSplit[1];
-// 				var sValue1 = aSplit[2];
-// 				var sValue2 = aSplit[3];
-// 				var oFilter = new Filter(sPath, sOperator, sValue1, sValue2);
-// 				aFilters.push(oFilter);
-// 			});
-// 			oBinding.filter(aFilters);
- 
-// 			// update filter bar
-// 			oView.byId("vsdFilterBar").setVisible(aFilters.length > 0);
-// 			oView.byId("vsdFilterLabel").setText(mParams.filterString);
-// 		},
-//----------------------------↑ここまで↑----------------------------
+			var sGetParameter = oEvent.getParameter("selectedKey");
+
+			jQuery.sap.log.setLevel(jQuery.sap.log.Level.WARNING);
+			jQuery.sap.log.warning("Select：getApplyContentPadding = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getApplyContentPadding());
+			jQuery.sap.log.warning("Select：getBackgroundDesign = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getBackgroundDesign());
+			jQuery.sap.log.warning("Select：getContent = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getContent());
+			jQuery.sap.log.warning("Select：getExpandable = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getExpandable());
+			jQuery.sap.log.warning("Select：getExpanded = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getExpanded());
+			jQuery.sap.log.warning("Select：getHeaderMode = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getHeaderMode());
+			jQuery.sap.log.warning("Select：getItems = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getItems());
+			jQuery.sap.log.warning("Select：getSelectedKey = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getSelectedKey());
+			jQuery.sap.log.warning("Select：getShowOverflowSelectList = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2"))
+				.getShowOverflowSelectList());
+			jQuery.sap.log.warning("Select：getStretchContentHeight = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getStretchContentHeight());
+			jQuery.sap.log.warning("Select：getUpperCase = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getUpperCase());
+
+		},
+
+		// //----------------------------↓さらにここから(sort)↓----------------------------
+		//ちょっとおいておく
+		// 		columnFactory : function(sId, oContext) {
+		// 			var oModel = this.getView().getModel();
+		// 			var sName = oContext.getProperty("name");
+		// 			var sType = oContext.getProperty("type");
+		// 			var sSemantics = oContext.getProperty("sap:semantics");
+		// 			var bVisible = oContext.getProperty("sap:visible") != "false";
+		// 			var iLen = oContext.getProperty("maxLength");
+		// 			iLen = iLen ? parseInt(iLen, 10) : 10;
+
+		// 			function specialTemplate() {
+		// 				var sUnit = oContext.getProperty("sap:unit");
+		// 				if (sUnit) {
+		// 					var sUnitType = oModel.getMetaModel().getMetaContext("/ProductSet/" + sUnit).getProperty()["sap:semantics"];
+		// 					if (sUnitType == "currency-code") {
+		// 						return new Currency({value: {path: sName, type: new String()}, currency: {path: sName}});
+		// 					}
+		// 				}
+		// 				return null;
+		// 			}
+
+		// 			return new Column(sId, {
+		// 				visible: bVisible && sSemantics != "unit-of-measure" && sSemantics != "currency-code",
+		// 				sortProperty:  sName ,
+		// 				filterProperty: oContext.getProperty("sap:filterable") == "true" ? sName : null,
+		// 				width: (iLen > 9 ? (iLen > 50 ? 15 : 10) : 5) + "rem",
+		// 				label: new sap.m.Label({text: "{/#Product/" + sName + "/@sap:label}"}),
+		// 				hAlign: sType && sType.indexOf("Decimal") >= 0 ? "End" : "Begin",
+		// 				template: specialTemplate() || new Text({text: {path: sName}})
+		// 			});
+		// 		},
+
+		//----------------------------↓さらにここから(sort(ぽっぷあっぷver.))↓----------------------------
+		// onExit : function () {
+		// 			if (this._oDialog3) {
+		// 				this._oDialog3.destroy();
+		// 			}
+		// 		},
+
+		// 		handleViewSettingsDialogButtonPressed: function (oEvent) {
+		// 			if (!this._oDialog3) {
+		// 				this._oDialog3 = sap.ui.xmlfragment("zhvz0020.view.Dialog3", this);
+		// 			}
+		// 			// toggle compact style
+		// 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog3);
+		// 			this._oDialog3.open();
+		// 		},
+
+		// 		handleConfirm: function(oEvent) {
+
+		// 			var oView = this.getView();
+		// 			var oTable = oView.byId("idProductsTable");
+
+		// 			var mParams = oEvent.getParameters();
+		// 			var oBinding = oTable.getBinding("items");
+
+		// 			// apply sorter to binding
+		// 			// (grouping comes before sorting)
+		// 			var aSorters = [];
+		// 			if (mParams.groupItem) {
+		// 				var sPath = mParams.groupItem.getKey();
+		// 				var bDescending = mParams.groupDescending;
+		// 				var vGroup = this.mGroupFunctions[sPath];
+		// 				aSorters.push(new Sorter(sPath, bDescending, vGroup));
+		// 			}
+		// 			var sPath = mParams.sortItem.getKey();
+		// 			var bDescending = mParams.sortDescending;
+		// 			aSorters.push(new Sorter(sPath, bDescending));
+		// 			oBinding.sort(aSorters);
+
+		// 			// apply filters to binding
+		// 			var aFilters = [];
+		// 			jQuery.each(mParams.filterItems, function (i, oItem) {
+		// 				var aSplit = oItem.getKey().split("___");
+		// 				var sPath = aSplit[0];
+		// 				var sOperator = aSplit[1];
+		// 				var sValue1 = aSplit[2];
+		// 				var sValue2 = aSplit[3];
+		// 				var oFilter = new Filter(sPath, sOperator, sValue1, sValue2);
+		// 				aFilters.push(oFilter);
+		// 			});
+		// 			oBinding.filter(aFilters);
+
+		// 			// update filter bar
+		// 			oView.byId("vsdFilterBar").setVisible(aFilters.length > 0);
+		// 			oView.byId("vsdFilterLabel").setText(mParams.filterString);
+		// 		},
+		//----------------------------↑ここまで↑----------------------------
 		onAfterRendering: function() {
 
 			$("div" + "[id$=text01]").attr("tabindex", 10);
