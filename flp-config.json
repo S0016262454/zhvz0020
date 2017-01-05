@@ -22,9 +22,9 @@
     },
     "tile": {
         "type": "StaticTile",
-        "title": "TitleV9",
-        "subtitle": "SubtitleV9",
-        "searchKeywords": "TitleV9,SubtitleV9",
+        "title": "Title1313",
+        "subtitle": "Subtitle",
+        "searchKeywords": "Title1313,Subtitle",
         "displayIconUrl": "sap-icon://approvals",
         "displayInfoText": "",
         "size": "1x1",

@@ -1,5 +1,5 @@
 jQuery.sap.registerModulePath("zhyi0010", "/zhyi0010");
-jQuery.sap.require("zhyi0010.commons.zhyi0010_0010_commons");
+//jQuery.sap.require("zhyi0010.commons.zhyi0010_0010_commons");
 
 jQuery.sap.includeStyleSheet('/zhyi0010/css/zhyi0010_0010.css');
 
@@ -16,7 +16,7 @@ sap.ui.define([
 	'sap/ui/core/util/Export',
 	'sap/ui/core/util/ExportTypeCSV',
 	'zhvz0020/model/Formatter',
-	"zhyi0010/commons/zhyi0010_0010_commons",
+	"zhyi0010/commons/zhyi0010_0010.commons",
 	'sap/ui/model/Filter',
 	"sap/ui/model/FilterOperator",
 	"sap/ui/unified/Currency",
@@ -49,9 +49,9 @@ sap.ui.define([
 	//	 src : "/zhyi0010/images/hoimi.jpg"
 	// });
 
-	jQuery.sap.log.setLevel(jQuery.sap.log.Level.ERROR);
+	jQuery.sap.log.setLevel(jQuery.sap.log.Level.WARNING);
 
-	jQuery.sap.log.warning("This should never have happened!");
+	jQuery.sap.log.warning("This should never have happened!" + commons.getHogeHoge());
 
 	/*	var sText = oBundle.getText("appTitle");
 		
@@ -109,6 +109,13 @@ sap.ui.define([
 			var oView = this.getView();
 			oView.setModel(this.oModel);
 			this.oSF = oView.byId("searchField");
+
+			// 受注先サジェストの追記ら
+			this.oSF2 = oView.byId("searchField2");
+			// this.oSF3 = oView.byId("filterBarInputSupplier");
+			this.oSF4 = oView.byId("CustomerInput");
+			// 受注先サジェストの追記ここまで
+
 			// this.getView().setModel(oModel);
 
 			// add buttons with javaScript (yet not possible with XML views)
@@ -117,7 +124,6 @@ sap.ui.define([
 			//	MessageToast.show("Executed " + oEvt.getSource().getText());
 			//	oHeaderSelect.close();
 			// };
-
 		},
 
 		// 得意先サジェスト
@@ -176,7 +182,7 @@ sap.ui.define([
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
 			this._oDialog.open();
 		},
-//----------------------------↓ここから↓----------------------------
+		//----------------------------↓ここから↓----------------------------
 		//在庫決定が押されたとき
 		handleTableSelectDialogPress2: function(oEvent) {
 			if (!this._oDialog2) {
@@ -197,7 +203,7 @@ sap.ui.define([
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog2);
 			this._oDialog2.open();
 		},
-//----------------------------↓さらにここから(search)↓----------------------------
+		//----------------------------↓さらにここから(search)↓----------------------------
 		//検索（全項目から）
 		handleSearch: function(oEvent) {
 			var sValue = oEvent.getParameter("value");
@@ -231,146 +237,300 @@ sap.ui.define([
 			var oBinding = oEvent.getSource().getBinding("items");
 			oBinding.filter(filters);
 		},
-//----------------------------↓さらにここから(明細入力/明細一覧連動)↓----------------------------
+		//----------------------------↓さらにここから(明細入力/明細一覧連動)↓----------------------------
 
-onSelectionListChange : function(oEvent){
-	//あとで
-		var sValue = oEvent.getParameter("value");
-	
-},
-onTabSelectionChangeExpand : function(oEvent){
-	
-	var eGetParameter = oEvent.getParameter("selectedKey");
-	
-	jQuery.sap.log.setLevel(jQuery.sap.log.Level.WARNING);
-	jQuery.sap.log.warning("Expand：getApplyContentPadding = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getApplyContentPadding());
-	jQuery.sap.log.warning("Expand：getBackgroundDesign = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getBackgroundDesign());
-	jQuery.sap.log.warning("Expand：getContent = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getContent());
-	jQuery.sap.log.warning("Expand：getExpandable = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getExpandable());
-	jQuery.sap.log.warning("Expand：getExpanded = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getExpanded());
-	jQuery.sap.log.warning("Expand：getHeaderMode = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getHeaderMode());
-	jQuery.sap.log.warning("Expand：getItems = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getItems());
-	jQuery.sap.log.warning("Expand：getSelectedKey = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getSelectedKey());
-	jQuery.sap.log.warning("Expand：getShowOverflowSelectList = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getShowOverflowSelectList());
-	jQuery.sap.log.warning("Expand：getStretchContentHeight = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getStretchContentHeight());
-	jQuery.sap.log.warning("Expand：getUpperCase = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getUpperCase());
+		onSelectionListChange: function(oEvent) { //明細一覧選択時
+			//テーブル
+			var table = this.getView().byId("idProductsTable");
+			//明細入力のタブ
+			var tab = this.getView().byId("idIconTabBarSeparatorNoIcon2");
+			//明細一覧で選択されている行のindex取得
+			var index = table.getSelectedIndex();
+			if (index == -1) { //明細一覧のselectedIndexが-1（明細一覧が選択解除状態）の場合
+				if (tab.getExpanded() == true) { //タブの選択状態が「選択」の場合
+					//明細入力タブの選択解除（selectedIndexの値を変える？とか？）
+					// tab.setSelectedKey(null);
+					// var keyB = tab.setSelectedKey;
+					tab.setSelectedKey("");
+					// tab.setSelectedKey("00000");
+					// tab.setSelectedKey(keyB);
+					tab.setExpanded(false);
+					// tab.select(oEvent);
+				} else { //タブの選択状態が「選択解除」の場合
+					//明細一覧が選択解除状態で且つタブの選択状態が選択解除の場合
+					// 何かあればここに記述（？）
+				}
+			} else { //明細一覧のselectedIndexが-1以外（明細一覧が選択状態）のIndexを持つ場合
+				tab.setExpanded(true);
+				//明細一覧で選択されている行のデータ取得（indexで指定）
+				var selectedItem = table.getContextByIndex(index);
+				//明細一覧で選択されている行の隠し項目：KEYの取得
+				var selectedListKey = selectedItem.getProperty("KEY");
+				//明細入力のタブのselectedKeyにselectedListKeyを渡す（同じ明細番号のタブが展開される）
+				tab.setSelectedKey(selectedListKey);
+			}
+		},
+		onTabSelectionChangeExpand: function(oEvent) {
+			// var a = 0;
+		},
+		onTabSelectionChangeSelect: function(oEvent) {
+			//選択されたタブのキー（selectedKey）取得
+			var selectedKey = oEvent.getParameter("selectedKey");
+			//テーブル
+			var table = this.getView().byId("idProductsTable");
+			var tab = this.getView().byId("idIconTabBarSeparatorNoIcon2");
+			tab.setExpanded(true);
+			var selectNowIndex = table.getSelectedIndex();
+			//
+			if (selectNowIndex == -1) {
+				//明細一覧取得
+				var rows = table.getRows();
+				//最大明細一覧の長さぶんの繰り返し
+				for (var i = 0; i < rows.length; i++) {
+					//変数keyにi件目のデータのテキスト（隠し項目）をいれる
+					var key = rows[i].getCells()[0].getText();
+					//タブのselectedKeyとi件目のデータのkey（隠し項目）が等しい場合
+					if (selectedKey == key) {
+						//明細一覧のselectedIndexにi件目のデータのkey（隠し項目）をセット
+						table.setSelectedIndex(i);
+						//ループを抜ける
+						break;
+					}
+				}
+			} else {
+				var selectNowItem = table.getContextByIndex(selectNowIndex);
+				var selectNowKEY = selectNowItem.getProperty("KEY");
+				tab.setExpanded(true);
+				//既に選択されている場合は何もしない（動きがやばいので一時封印）
+				if (selectNowKEY == selectedKey) {
+					table.setSelectedIndex(-1);
+					return;
+				} else {
+					//明細一覧取得
+					var rows = table.getRows();
+					//最大明細一覧の長さぶんの繰り返し
+					for (var i = 0; i < rows.length; i++) {
+						//変数keyにi件目のデータのテキスト（隠し項目）をいれる
+						var key = rows[i].getCells()[0].getText();
+						//タブのselectedKeyとi件目のデータのkey（隠し項目）が等しい場合
+						if (selectedKey == key) {
+							//明細一覧のselectedIndexにi件目のデータのkey（隠し項目）をセット
+							table.setSelectedIndex(i);
+							//ループを抜ける
+							break;
+						}
+					}
+				}
+			}
+			// var selectNowItem = table.getContextByIndex(selectNowIndex);
+			// var selectNowKEY = selectNowItem.getProperty("KEY");
 
+			// //既に選択されている場合は何もしない（動きがやばいので一時封印）
+			// if (selectNowKEY == selectedKey) {
 
-},
-onTabSelectionChangeSelect : function(oEvent){
-	
-	var sGetParameter = oEvent.getParameter("selectedKey");
-	
-	jQuery.sap.log.setLevel(jQuery.sap.log.Level.WARNING);
-	jQuery.sap.log.warning("Select：getApplyContentPadding = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getApplyContentPadding());
-	jQuery.sap.log.warning("Select：getBackgroundDesign = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getBackgroundDesign());
-	jQuery.sap.log.warning("Select：getContent = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getContent());
-	jQuery.sap.log.warning("Select：getExpandable = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getExpandable());
-	jQuery.sap.log.warning("Select：getExpanded = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getExpanded());
-	jQuery.sap.log.warning("Select：getHeaderMode = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getHeaderMode());
-	jQuery.sap.log.warning("Select：getItems = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getItems());
-	jQuery.sap.log.warning("Select：getSelectedKey = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getSelectedKey());
-	jQuery.sap.log.warning("Select：getShowOverflowSelectList = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getShowOverflowSelectList());
-	jQuery.sap.log.warning("Select：getStretchContentHeight = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getStretchContentHeight());
-	jQuery.sap.log.warning("Select：getUpperCase = " + sap.ui.getCore().byId(this.createId("idIconTabBarSeparatorNoIcon2")).getUpperCase());
+			// 	table.setSelectedIndex(-1);
+			// 	return;
 
-},
+			// } else {
 
-// //----------------------------↓さらにここから(sort)↓----------------------------
-//ちょっとおいておく
-// 		columnFactory : function(sId, oContext) {
-// 			var oModel = this.getView().getModel();
-// 			var sName = oContext.getProperty("name");
-// 			var sType = oContext.getProperty("type");
-// 			var sSemantics = oContext.getProperty("sap:semantics");
-// 			var bVisible = oContext.getProperty("sap:visible") != "false";
-// 			var iLen = oContext.getProperty("maxLength");
-// 			iLen = iLen ? parseInt(iLen, 10) : 10;
- 
-// 			function specialTemplate() {
-// 				var sUnit = oContext.getProperty("sap:unit");
-// 				if (sUnit) {
-// 					var sUnitType = oModel.getMetaModel().getMetaContext("/ProductSet/" + sUnit).getProperty()["sap:semantics"];
-// 					if (sUnitType == "currency-code") {
-// 						return new Currency({value: {path: sName, type: new String()}, currency: {path: sName}});
-// 					}
-// 				}
-// 				return null;
-// 			}
- 
-// 			return new Column(sId, {
-// 				visible: bVisible && sSemantics != "unit-of-measure" && sSemantics != "currency-code",
-// 				sortProperty:  sName ,
-// 				filterProperty: oContext.getProperty("sap:filterable") == "true" ? sName : null,
-// 				width: (iLen > 9 ? (iLen > 50 ? 15 : 10) : 5) + "rem",
-// 				label: new sap.m.Label({text: "{/#Product/" + sName + "/@sap:label}"}),
-// 				hAlign: sType && sType.indexOf("Decimal") >= 0 ? "End" : "Begin",
-// 				template: specialTemplate() || new Text({text: {path: sName}})
-// 			});
-// 		},
+			// 	//明細一覧取得
+			// 	var rows = table.getRows();
+			// 	//最大明細一覧の長さぶんの繰り返し
+			// 	for (var i = 0; i < rows.length; i++) {
 
-//----------------------------↓さらにここから(sort(ぽっぷあっぷver.))↓----------------------------
-// onExit : function () {
-// 			if (this._oDialog3) {
-// 				this._oDialog3.destroy();
-// 			}
-// 		},
- 
-// 		handleViewSettingsDialogButtonPressed: function (oEvent) {
-// 			if (!this._oDialog3) {
-// 				this._oDialog3 = sap.ui.xmlfragment("zhvz0020.view.Dialog3", this);
-// 			}
-// 			// toggle compact style
-// 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog3);
-// 			this._oDialog3.open();
-// 		},
- 
-// 		handleConfirm: function(oEvent) {
- 
-// 			var oView = this.getView();
-// 			var oTable = oView.byId("idProductsTable");
- 
-// 			var mParams = oEvent.getParameters();
-// 			var oBinding = oTable.getBinding("items");
- 
-// 			// apply sorter to binding
-// 			// (grouping comes before sorting)
-// 			var aSorters = [];
-// 			if (mParams.groupItem) {
-// 				var sPath = mParams.groupItem.getKey();
-// 				var bDescending = mParams.groupDescending;
-// 				var vGroup = this.mGroupFunctions[sPath];
-// 				aSorters.push(new Sorter(sPath, bDescending, vGroup));
-// 			}
-// 			var sPath = mParams.sortItem.getKey();
-// 			var bDescending = mParams.sortDescending;
-// 			aSorters.push(new Sorter(sPath, bDescending));
-// 			oBinding.sort(aSorters);
- 
-// 			// apply filters to binding
-// 			var aFilters = [];
-// 			jQuery.each(mParams.filterItems, function (i, oItem) {
-// 				var aSplit = oItem.getKey().split("___");
-// 				var sPath = aSplit[0];
-// 				var sOperator = aSplit[1];
-// 				var sValue1 = aSplit[2];
-// 				var sValue2 = aSplit[3];
-// 				var oFilter = new Filter(sPath, sOperator, sValue1, sValue2);
-// 				aFilters.push(oFilter);
-// 			});
-// 			oBinding.filter(aFilters);
- 
-// 			// update filter bar
-// 			oView.byId("vsdFilterBar").setVisible(aFilters.length > 0);
-// 			oView.byId("vsdFilterLabel").setText(mParams.filterString);
-// 		},
-//----------------------------↑ここまで↑----------------------------
+			// 		//変数keyにi件目のデータのテキスト（隠し項目）をいれる
+			// 		var key = rows[i].getCells()[0].getText();
+
+			// 		//タブのselectedKeyとi件目のデータのkey（隠し項目）が等しい場合
+			// 		if (selectedKey == key) {
+
+			// 			//明細一覧のselectedIndexにi件目のデータのkey（隠し項目）をセット
+			// 			table.setSelectedIndex(i);
+			// 			//ループを抜ける
+			// 			break;
+
+			// 		}
+
+			// 	}
+			// }
+
+		},
+		// 受注先サジェスト
+		onSuggestCustomerId1: function(event) {
+			var value = event.getParameter("suggestValue");
+			if (!value) value = '　**';
+			if (value === '*') value = '';
+			var filters = [];
+			if (value) {
+				filters = [new sap.ui.model.Filter([
+					new sap.ui.model.Filter("key", function(sKey) {
+						return (sKey || "").toUpperCase().indexOf(value.toUpperCase()) > -1;
+					}),
+					new sap.ui.model.Filter("text", function(sText) {
+						return (sText || "").toUpperCase().indexOf(value.toUpperCase()) > -1;
+					})
+				], false)];
+			}
+			this.oSF2.getBinding("suggestionItems").filter(filters);
+			this.oSF2.suggest(event);
+		},
+				// 受注先サジェスト
+		suggest2: function(event) {
+			var value = event.getParameter("suggestValue");
+			if (!value) value = '　**';
+			if (value === '*') value = '';
+			var filters = [];
+			if (value) {
+				filters = [new sap.ui.model.Filter([
+					new sap.ui.model.Filter("key", function(sKey) {
+						return (sKey || "").toUpperCase().indexOf(value.toUpperCase()) > -1;
+					}),
+					new sap.ui.model.Filter("text", function(sText) {
+						return (sText || "").toUpperCase().indexOf(value.toUpperCase()) > -1;
+					})
+				], false)];
+			}
+			this.oSF4.getBinding("suggestionItems").filter(filters);
+			this.oSF4.suggest(event);
+		},
+		// // 受注先検索ヘルプ(まだ)
+		// onCustomerValueHelpRequest: function() {
+		// 	var that = this;
+		// 	var oValueHelpDialog = new sap.ui.comp.valuehelpdialog.ValueHelpDialog({
+		// 		basicSearchText: this.theTokenInput.getValue(),
+		// 		title: "受注先検索ヘルプ",
+		// 		supportMultiselect: false,
+		// 		supportRanges: true,
+		// 		supportRangesOnly: false,
+		// 		key: this.aKeys[0],
+		// 		descriptionKey: this.aKeys[1],
+		// 		stretch: sap.ui.Device.system.phone,
+		// 		ok: function(oControlEvent) {
+		// 			that.aTokens = oControlEvent.getParameter("tokens");
+		// 			that.theTokenInput.setTokens(that.aTokens);
+		// 			oValueHelpDialog.close();
+		// 		},
+		// 		cancel: function(oControlEvent) {
+		// 			sap.m.MessageToast.show("Cancel pressed!");
+		// 			oValueHelpDialog.close();
+		// 		},
+		// 		afterClose: function() {
+		// 			oValueHelpDialog.destroy();
+		// 		}
+		// 	});
+		// },
+		handleValueHelpSupplier: function() {
+			var a = 0;
+		},
+		// //----------------------------↓さらにここから(sort)↓----------------------------
+		//ちょっとおいておく
+		// 		columnFactory : function(sId, oContext) {
+		// 			var oModel = this.getView().getModel();
+		// 			var sName = oContext.getProperty("name");
+		// 			var sType = oContext.getProperty("type");
+		// 			var sSemantics = oContext.getProperty("sap:semantics");
+		// 			var bVisible = oContext.getProperty("sap:visible") != "false";
+		// 			var iLen = oContext.getProperty("maxLength");
+		// 			iLen = iLen ? parseInt(iLen, 10) : 10;
+
+		// 			function specialTemplate() {
+		// 				var sUnit = oContext.getProperty("sap:unit");
+		// 				if (sUnit) {
+		// 					var sUnitType = oModel.getMetaModel().getMetaContext("/ProductSet/" + sUnit).getProperty()["sap:semantics"];
+		// 					if (sUnitType == "currency-code") {
+		// 						return new Currency({value: {path: sName, type: new String()}, currency: {path: sName}});
+		// 					}
+		// 				}
+		// 				return null;
+		// 			}
+
+		// 			return new Column(sId, {
+		// 				visible: bVisible && sSemantics != "unit-of-measure" && sSemantics != "currency-code",
+		// 				sortProperty:  sName ,
+		// 				filterProperty: oContext.getProperty("sap:filterable") == "true" ? sName : null,
+		// 				width: (iLen > 9 ? (iLen > 50 ? 15 : 10) : 5) + "rem",
+		// 				label: new sap.m.Label({text: "{/#Product/" + sName + "/@sap:label}"}),
+		// 				hAlign: sType && sType.indexOf("Decimal") >= 0 ? "End" : "Begin",
+		// 				template: specialTemplate() || new Text({text: {path: sName}})
+		// 			});
+		// 		},
+
+		//----------------------------↓さらにここから(sort(ぽっぷあっぷver.))↓----------------------------
+		// onExit : function () {
+		// 			if (this._oDialog3) {
+		// 				this._oDialog3.destroy();
+		// 			}
+		// 		},
+
+		// 		handleViewSettingsDialogButtonPressed: function (oEvent) {
+		// 			if (!this._oDialog3) {
+		// 				this._oDialog3 = sap.ui.xmlfragment("zhvz0020.view.Dialog3", this);
+		// 			}
+		// 			// toggle compact style
+		// 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog3);
+		// 			this._oDialog3.open();
+		// 		},
+
+		// 		handleConfirm: function(oEvent) {
+
+		// 			var oView = this.getView();
+		// 			var oTable = oView.byId("idProductsTable");
+
+		// 			var mParams = oEvent.getParameters();
+		// 			var oBinding = oTable.getBinding("items");
+
+		// 			// apply sorter to binding
+		// 			// (grouping comes before sorting)
+		// 			var aSorters = [];
+		// 			if (mParams.groupItem) {
+		// 				var sPath = mParams.groupItem.getKey();
+		// 				var bDescending = mParams.groupDescending;
+		// 				var vGroup = this.mGroupFunctions[sPath];
+		// 				aSorters.push(new Sorter(sPath, bDescending, vGroup));
+		// 			}
+		// 			var sPath = mParams.sortItem.getKey();
+		// 			var bDescending = mParams.sortDescending;
+		// 			aSorters.push(new Sorter(sPath, bDescending));
+		// 			oBinding.sort(aSorters);
+
+		// 			// apply filters to binding
+		// 			var aFilters = [];
+		// 			jQuery.each(mParams.filterItems, function (i, oItem) {
+		// 				var aSplit = oItem.getKey().split("___");
+		// 				var sPath = aSplit[0];
+		// 				var sOperator = aSplit[1];
+		// 				var sValue1 = aSplit[2];
+		// 				var sValue2 = aSplit[3];
+		// 				var oFilter = new Filter(sPath, sOperator, sValue1, sValue2);
+		// 				aFilters.push(oFilter);
+		// 			});
+		// 			oBinding.filter(aFilters);
+
+		// 			// update filter bar
+		// 			oView.byId("vsdFilterBar").setVisible(aFilters.length > 0);
+		// 			oView.byId("vsdFilterLabel").setText(mParams.filterString);
+		// 		},
+		//----------------------------↑ここまで↑----------------------------
 		onAfterRendering: function() {
 
 			$("div" + "[id$=text01]").attr("tabindex", 10);
 			$("div" + "[id$=text02]").attr("tabindex", 20);
 			$(":input" + "[id*=text03]").attr("tabindex", 30);
 			$(":input" + "[id*=text04]").attr("tabindex", 40);
+
+			var table = this.getView().byId("idProductsTable");
+			var rows = table.getRows();
+			for (var i = 0; i < rows.length; i++) {
+				//変数keyにi件目のデータのテキスト（隠し項目）をいれる
+				var key = rows[i].getCells()[0].getText();
+				//タブのselectedKeyとi件目のデータのkey（隠し項目）が等しい場合
+				if ('00020' == key) {
+					//明細一覧のselectedIndexにi件目のデータのkey（隠し項目）をセット
+					table.setSelectedIndex(i);
+					//ループを抜ける
+					break;
+				}
+			}
 		},
 
 		onApproveDialog: function() {

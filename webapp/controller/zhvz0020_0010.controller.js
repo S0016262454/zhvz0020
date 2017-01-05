@@ -285,6 +285,7 @@ sap.ui.define([
 			if (selectNowIndex == -1) {
 				//明細一覧取得
 				var rows = table.getRows();
+				// var rowTest = table.
 				//最大明細一覧の長さぶんの繰り返し
 				for (var i = 0; i < rows.length; i++) {
 					//変数keyにi件目のデータのテキスト（隠し項目）をいれる
@@ -374,7 +375,7 @@ sap.ui.define([
 			this.oSF2.getBinding("suggestionItems").filter(filters);
 			this.oSF2.suggest(event);
 		},
-				// 受注先サジェスト
+		// 受注先サジェスト
 		suggest2: function(event) {
 			var value = event.getParameter("suggestValue");
 			if (!value) value = '　**';
@@ -419,9 +420,35 @@ sap.ui.define([
 		// 		}
 		// 	});
 		// },
-		handleValueHelpSupplier: function() {
-			var a = 0;
+		onValueHelpRequest: function(oEvent) {
+			if (!this._oDialog4) {
+				this._oDialog4 = sap.ui.xmlfragment("zhvz0020.view.Dialog4", this);
+			}
+
+			// Multi-select if required
+			// var bMultiSelect = !!oEvent.getSource().data("multi");
+			// this._oDialog2.setMultiSelect(bMultiSelect);
+
+			// // Remember selections if required
+			// var bRemember = !!oEvent.getSource().data("remember");
+			// this._oDialog2.setRememberSelections(bRemember);
+
+			 this.getView().addDependent(this._oDialog4);
+
+			// toggle compact style
+			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog4);
+			this._oDialog4.open();
 		},
+	handleOK: function(oEvent) {
+//		this._storeShowResetEnabled();
+		this._oDialog4.close();
+		// this.getView().removeDependents();
+	},
+
+	handleCancel: function(oEvent) {
+		this._oDialog4.close();
+	},
+
 		// //----------------------------↓さらにここから(sort)↓----------------------------
 		//ちょっとおいておく
 		// 		columnFactory : function(sId, oContext) {

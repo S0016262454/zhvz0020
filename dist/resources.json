@@ -1,10 +1,25 @@
 {
     "resources": [
         {
-            "name": "Component.js"
+            "name": "css/zhvz0020_0010.css"
         },
         {
-            "name": "css/zhvz0020_0010.css"
+            "name": "mockdata/ZFAV0020.json"
+        },
+        {
+            "name": "mockdata/metadata.xml"
+        },
+        {
+            "name": "mockdata/server.js"
+        },
+        {
+            "name": "mockdata/Category.json"
+        },
+        {
+            "name": "mockdata/Currency.json"
+        },
+        {
+            "name": "mockdata/Products.json"
         },
         {
             "name": "i18n/i18n_ja.properties",
@@ -15,55 +30,40 @@
             "raw": "i18n/i18n.properties"
         },
         {
+            "name": "Component.js"
+        },
+        {
+            "name": "view/zhvz0020_0010.view.xml"
+        },
+        {
+            "name": "view/Dialog.fragment.xml"
+        },
+        {
+            "name": "view/Dialog2.fragment.xml"
+        },
+        {
+            "name": "view/Dialog3.fragment.xml"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "controller/zhvz0020_0010.controller.js"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
             "name": "localService/metadata.xml"
         },
         {
             "name": "localService/metadata.xml.org"
         },
         {
-            "name": "manifest.json"
-        },
-        {
-            "name": "model/zhvz0020_0010.model.js"
-        },
-        {
             "name": "model/Formatter.js"
         },
         {
-            "name": "index.html"
-        },
-        {
-            "name": "mockdata/metadata.xml"
-        },
-        {
-            "name": "mockdata/Currency.json"
-        },
-        {
-            "name": "mockdata/Products.json"
-        },
-        {
-            "name": "mockdata/server.js"
-        },
-        {
-            "name": "mockdata/ZFAV0020.json"
-        },
-        {
-            "name": "mockdata/Category.json"
-        },
-        {
-            "name": "view/Dialog2.fragment.xml"
-        },
-        {
-            "name": "view/Dialog.fragment.xml"
-        },
-        {
-            "name": "view/Dialog3.fragment.xml"
-        },
-        {
-            "name": "view/zhvz0020_0010.view.xml"
-        },
-        {
-            "name": "controller/zhvz0020_0010.controller.js"
+            "name": "model/zhvz0020_0010.model.js"
         },
         {
             "name": "Component-preload.js",
